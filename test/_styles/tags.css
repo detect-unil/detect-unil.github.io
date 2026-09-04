@@ -1,0 +1,40 @@
+.tags {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 100%;
+  margin: 20px 0;
+}
+
+.tag {
+  max-width: 100%;
+  margin: 0;
+  padding: 4px 10px;
+  border: var(--hairline);
+  border-radius: var(--rounded);
+  background: var(--secondary);
+  color: var(--text);
+  font-size: var(--small);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.tag:hover {
+  background: var(--tint);
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.tag[data-active] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--background);
+}
+
+/*# sourceMappingURL=tags.css.map */

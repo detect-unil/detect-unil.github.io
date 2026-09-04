@@ -1,0 +1,141 @@
+.citation-container {
+  container-type: inline-size;
+}
+
+.citation {
+  display: flex;
+  margin: 0;
+  border: none;
+  border-bottom: var(--hairline);
+  border-radius: 0;
+  background: none;
+  overflow: visible;
+  box-shadow: none;
+  transition: background var(--transition);
+}
+
+.citation:hover {
+  background: var(--tint);
+}
+
+.citation-image {
+  position: relative;
+  width: 170px;
+  flex-shrink: 0;
+  margin: 22px 24px 22px 0;
+  border: var(--hairline);
+}
+
+.citation-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.citation-text {
+  position: relative;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  max-width: 100%;
+  height: min-content;
+  padding: 22px 12px;
+  text-align: left;
+  overflow-wrap: break-word;
+  z-index: 0;
+}
+
+.citation-title,
+.citation-authors,
+.citation-details,
+.citation-description {
+  width: 100%;
+}
+
+.citation-title {
+  color: var(--text);
+  font-family: var(--heading);
+  font-size: 1.1rem;
+  font-weight: var(--semi-bold);
+  line-height: var(--compact);
+  text-decoration: none;
+}
+
+.citation-title:hover {
+  color: var(--primary);
+}
+
+.citation-text > .icon {
+  position: static;
+  z-index: 0;
+  color: var(--primary);
+  font-size: 0.8rem;
+  opacity: 1;
+}
+
+.citation-type {
+  color: var(--primary);
+  font-size: var(--small);
+  font-weight: var(--semi-bold);
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.citation-authors {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: var(--compact);
+}
+
+.citation-details {
+  color: var(--dark-gray);
+  font-family: var(--code);
+  font-size: 0.78rem;
+  line-height: var(--compact);
+}
+
+.citation-publisher {
+  text-transform: none;
+}
+
+.citation-description {
+  color: var(--dark-gray);
+  line-height: var(--spacing);
+}
+
+.citation-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.citation-buttons .button {
+  margin: 0;
+}
+
+.citation-text > .tags {
+  display: inline-flex;
+  justify-content: flex-start;
+  margin: 0;
+}
+
+@container (max-width: 700px) {
+  .citation {
+    flex-direction: column;
+  }
+  .citation-image {
+    width: unset;
+    height: 170px;
+    margin: 22px 0 0 0;
+  }
+  .citation-text {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/*# sourceMappingURL=citation.css.map */

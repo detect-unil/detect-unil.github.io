@@ -1,0 +1,9 @@
+hr {
+  margin: 40px 0;
+  background: none;
+  border: none;
+  height: 6px;
+  background-image: repeating-linear-gradient(90deg, var(--light-gray) 0 1px, transparent 1px 8px);
+}
+
+/*# sourceMappingURL=rule.css.map */
