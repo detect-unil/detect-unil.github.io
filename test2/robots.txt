@@ -1,0 +1,1 @@
+Sitemap: https://detect-unil.github.io/test2/sitemap.xml

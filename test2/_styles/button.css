@@ -1,0 +1,91 @@
+button {
+  cursor: pointer;
+}
+
+.button-wrapper {
+  display: contents;
+}
+
+.button {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100% - 5px - 5px);
+  margin: 5px;
+  padding: 13px 22px;
+  border: solid 1px var(--primary);
+  border-radius: 0;
+  background: var(--primary);
+  color: var(--invert);
+  text-align: center;
+  font: inherit;
+  font-family: var(--code);
+  font-size: 0.7rem;
+  font-weight: var(--semi-bold);
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
+  text-decoration: none;
+  vertical-align: middle;
+  appearance: none;
+  overflow: hidden;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.button:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--text);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+  z-index: 0;
+}
+
+.button:hover:before {
+  transform: scaleX(1);
+}
+
+.button > * {
+  position: relative;
+  z-index: 1;
+}
+
+.button:hover {
+  border-color: var(--text);
+  color: var(--background);
+}
+
+.button .icon {
+  transition: transform var(--transition);
+}
+
+.button:hover .icon {
+  transform: translateX(4px);
+}
+
+.button[data-style=bare] {
+  padding: 7px 0;
+  margin: 5px 18px 5px 0;
+  border-color: transparent;
+  border-bottom: solid 1px var(--light-gray);
+  background: none;
+  color: var(--primary);
+  overflow: visible;
+}
+.button[data-style=bare]:before {
+  display: none;
+}
+.button[data-style=bare]:hover {
+  background: none;
+  border-bottom-color: var(--primary);
+  color: var(--text);
+}
+
+.button[data-flip] {
+  flex-direction: row-reverse;
+}
+
+/*# sourceMappingURL=button.css.map */

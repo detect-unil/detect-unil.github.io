@@ -1,0 +1,76 @@
+[data-dark=true] {
+  --primary: #ff5f2e;
+  --accent: #3fe0ff;
+  --secondary: #131a24;
+  --text: #e9edf3;
+  --background: #07090c;
+  --background-alt: #0b0e14;
+  --light-gray: #1d2531;
+  --gray: #6b7688;
+  --dark-gray: #9aa6b8;
+  --overlay: #e9edf31f;
+  --tint: #ff5f2e14;
+  --glow: #ff5f2e33;
+  --invert: #04060a;
+  --invert-text: #e9edf3;
+  --field: 1;
+}
+
+[data-dark=false] {
+  --primary: #cf3d12;
+  --accent: #0a6f8f;
+  --secondary: #dfe3ec;
+  --text: #0a0d13;
+  --background: #f5f6f9;
+  --background-alt: #eaedf3;
+  --light-gray: #ccd2de;
+  --gray: #6c7488;
+  --dark-gray: #495163;
+  --overlay: #0a0d131f;
+  --tint: #cf3d1210;
+  --glow: #cf3d1226;
+  --invert: #07090c;
+  --invert-text: #f5f6f9;
+  --field: 0.72;
+}
+
+:root {
+  --title: "Archivo", system-ui, sans-serif;
+  --heading: "Archivo", system-ui, sans-serif;
+  --body: "Chivo", system-ui, sans-serif;
+  --code: "JetBrains Mono", monospace;
+  --small: 0.8rem;
+  --large: clamp(1.02rem, 0.97rem + 0.3vw, 1.18rem);
+  --xl: clamp(1.35rem, 1.1rem + 1.1vw, 2rem);
+  --xxl: clamp(2rem, 1.4rem + 2.6vw, 3.6rem);
+  --display: clamp(2.5rem, 1rem + 6.6vw, 6.4rem);
+  --thin: 400;
+  --regular: 400;
+  --semi-bold: 500;
+  --bold: 700;
+  --spacing: 1.7;
+  --compact: 1.4;
+  --page: 1180px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --stack: clamp(52px, 7vw, 104px);
+  --rounded: 0px;
+  --hairline: solid 1px var(--light-gray);
+  --shadow: 0 18px 50px -30px var(--overlay);
+  --transition: 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
+  --letter-caps: 0.16em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition: 0s linear;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*# sourceMappingURL=-theme.css.map */
