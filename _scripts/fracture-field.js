@@ -7,18 +7,36 @@
   distribution and a real P21 intensity, which the hero readout and the rose
   diagram on the home page both report.
 
-  Everything is driven by one fixed seed, so the network is the same on every
-  visit, and the whole thing collapses to a single static frame when the
-  visitor asks for reduced motion.
+  Every visit grows a different outcrop: the seed, the two set orientations,
+  their dispersion, the density and the size of the window are all drawn afresh
+  on each load, so the readout and the rose move with the field. Appending
+  ?seed=12345 pins one field, which is how two renders can be compared. The
+  whole thing collapses to a single static frame when the visitor asks for
+  reduced motion.
 */
 
 (() => {
-  const SEED = 20230901; // the group was founded in 2023
-  const SPAN_M = 44; // canvas width, in metres, for the scale bar and P21
+  // A new field on every load. ?seed=12345 pins one, which is the only way to
+  // grow the same field twice once the seed moves.
+  const SEED = (() => {
+    const pinned = Number(new URLSearchParams(location.search).get("seed"));
+    return Number.isFinite(pinned) && pinned !== 0
+      ? pinned | 0
+      : (Math.random() * 2 ** 32) | 0;
+  })();
+
+  // These are the centres of the jitter, not the values drawn: each load picks
+  // its own set means and dispersions around them, so a visit reads as a
+  // different site while still looking like the group's own outcrop maps.
   const SETS = [
-    { mean: -34, disp: 16 }, // conjugate set 1, degrees clockwise from east
-    { mean: 27, disp: 18 }, // conjugate set 2
+    { mean: -34, disp: 17 }, // conjugate set 1, degrees clockwise from east
+    { mean: 27, disp: 17 }, // conjugate set 2
   ];
+  const MEAN_JITTER = 12; // degrees either side of the set mean
+  const DISP_RANGE = [12, 22]; // dispersion about the drawn mean, degrees
+  const SPAN_RANGE = [36, 56]; // window width in metres, for P21 and the readout
+  const DENSITY_RANGE = [170, 245]; // traces per megapixel of canvas
+  const MIX_RANGE = [0.42, 0.62]; // share of the traces belonging to set 1
 
   /* ---------- deterministic randomness ---------- */
 
@@ -100,6 +118,18 @@
 
   const buildNetwork = (w, h) => {
     const rand = mulberry32(SEED);
+
+    // the outcrop this visit gets. Drawn before anything else, and from the
+    // same sequence as the traces, so one seed still reproduces one field.
+    const pick = ([lo, hi]) => lo + rand() * (hi - lo);
+    const sets = SETS.map((set) => ({
+      mean: set.mean + (rand() - 0.5) * 2 * MEAN_JITTER,
+      disp: pick(DISP_RANGE),
+    }));
+    const mix = pick(MIX_RANGE);
+    const spanM = Math.round(pick(SPAN_RANGE));
+    const density = pick(DENSITY_RANGE);
+
     const cellSize = 46;
     const grid = new Map();
     const traces = [];
@@ -118,13 +148,17 @@
       }
     };
 
-    // trace count scales with area so density stays constant across screens
-    const target = Math.round(Math.min(320, Math.max(90, (w * h) / 4200)));
+    // the drawn density is per megapixel, so a load looks equally dense on
+    // any screen, and the clamp keeps a phone from going bare and a very wide
+    // monitor from turning to mud
+    const target = Math.round(
+      Math.min(320, Math.max(90, ((w * h) / 1e6) * density))
+    );
     const nodes = [];
 
     for (let i = 0; i < target; i++) {
-      const setIndex = rand() < 0.55 ? 0 : 1;
-      const set = SETS[setIndex];
+      const setIndex = rand() < mix ? 0 : 1;
+      const set = sets[setIndex];
       // box-muller-ish dispersion about the set mean
       const spread = (rand() + rand() + rand() - 1.5) * set.disp;
       const angle = ((set.mean + spread) * Math.PI) / 180;
@@ -169,7 +203,7 @@
     }
 
     const totalLength = traces.reduce((sum, t) => sum + t.length, 0);
-    const mPerPx = SPAN_M / w;
+    const mPerPx = spanM / w;
     const counts = { I: 0, Y: 0, X: 0 };
     for (const n of nodes) counts[n.kind]++;
     // an abutment consumed by a later trace reads as a crossing; approximate
@@ -188,10 +222,10 @@
         Y: counts.Y,
         X: counts.X,
         p21: (totalLength * mPerPx) / (w * mPerPx * h * mPerPx),
-        setOne: SETS[0].mean,
-        setTwo: SETS[1].mean,
-        spanM: SPAN_M,
-        pxPerM: w / SPAN_M,
+        setOne: sets[0].mean,
+        setTwo: sets[1].mean,
+        spanM,
+        pxPerM: w / spanM,
       },
     };
   };

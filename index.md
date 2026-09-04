@@ -77,7 +77,7 @@ Integration of these field-based and computational approaches can deliver better
 </div>
 {%
   include rose.html
-  caption="Length-weighted rose diagram of the synthetic fracture network drawn behind this page. Two conjugate sets, grown live in your browser from a fixed seed."
+  caption="Length-weighted rose diagram of the synthetic fracture network drawn behind this page. Two conjugate sets, grown live in your browser, and a different network on every visit."
 %}
 </div>
 
