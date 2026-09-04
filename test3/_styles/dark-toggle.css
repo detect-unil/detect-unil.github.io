@@ -1,0 +1,53 @@
+.dark-toggle {
+  position: absolute;
+  right: max(var(--gutter), 46px);
+  bottom: 20px;
+  width: 46px;
+  height: 22px;
+  margin: 0;
+  border: solid 1px var(--light-gray);
+  border-radius: 0;
+  background: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border var(--transition);
+}
+
+.dark-toggle:hover {
+  border-color: var(--primary);
+}
+
+.dark-toggle:before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  width: 21px;
+  height: 18px;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  transition: left var(--transition);
+}
+
+.dark-toggle:checked:before {
+  left: calc(100% - 22px);
+}
+
+.dark-toggle:after {
+  content: "\f185";
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  color: var(--text);
+  font-size: 11px;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  transform: translate(-50%, -50%);
+  transition: left var(--transition);
+}
+
+.dark-toggle:checked:after {
+  content: "\f186";
+  left: calc(100% - 11px);
+}
+
+/*# sourceMappingURL=dark-toggle.css.map */

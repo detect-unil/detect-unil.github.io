@@ -1,0 +1,43 @@
+.float {
+  margin-bottom: 26px;
+  max-width: min(280px, 45%);
+}
+
+.float > * {
+  margin: 0 !important;
+}
+
+.float:not([data-flip]) {
+  float: left;
+  margin-right: 44px;
+}
+
+.float .portrait {
+  width: 100%;
+}
+
+.float .button-wrapper .button {
+  justify-content: flex-start;
+}
+
+.float[data-flip] {
+  float: right;
+  margin-left: 40px;
+}
+
+.float[data-clear] {
+  float: unset;
+  clear: both;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .float {
+    float: unset !important;
+    clear: both !important;
+    margin: auto !important;
+    max-width: unset;
+  }
+}
+
+/*# sourceMappingURL=float.css.map */

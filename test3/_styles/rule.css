@@ -1,0 +1,11 @@
+hr {
+  height: 5px;
+  margin: 46px 0;
+  border: none;
+  border-top: solid 1px var(--light-gray);
+  color: var(--unit, var(--light-gray));
+  opacity: 0.7;
+  background-image: repeating-linear-gradient(45deg, currentColor 0 1px, transparent 1px 5px);
+}
+
+/*# sourceMappingURL=rule.css.map */

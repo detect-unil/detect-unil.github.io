@@ -1,0 +1,63 @@
+button {
+  cursor: pointer;
+}
+
+.button-wrapper {
+  display: contents;
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  margin: 0;
+  padding: 11px 20px;
+  border: solid 1px var(--primary);
+  border-radius: 0;
+  background: var(--primary);
+  color: var(--background);
+  font-family: var(--code);
+  font-size: 0.68rem;
+  font-weight: var(--regular);
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  appearance: none;
+  transition: background var(--transition), border var(--transition), color var(--transition);
+}
+
+.button:hover {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--background);
+}
+
+.button .icon {
+  font-size: 0.9em;
+}
+
+.button[data-style=bare] {
+  padding: 4px 0;
+  border: none;
+  background: none;
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  text-decoration-color: color-mix(in srgb, var(--primary) 45%, transparent);
+}
+
+.button[data-style=bare]:hover {
+  color: var(--text);
+  text-decoration-color: var(--text);
+}
+
+.button[data-flip] {
+  flex-direction: row-reverse;
+}
+
+/*# sourceMappingURL=button.css.map */
