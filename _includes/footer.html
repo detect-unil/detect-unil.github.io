@@ -1,7 +1,8 @@
 {% comment %}
-  The bottom margin of the sheet: who compiled it, where else to find them,
-  and the north arrow. Restyled by this site; upstream prints a photographic
-  band here instead.
+  The bottom margin of the sheet: who compiled it and where else to find
+  them. Restyled by this site; upstream prints a photographic band here
+  instead. The north arrow that used to sit here is now the back to top
+  control in _includes/to-top.html.
 {% endcomment %}
 
 <footer>
@@ -26,11 +27,6 @@
   </div>
 
   <div class="footer-block footer-block-end">
-    <svg class="north-arrow" viewBox="0 0 26 54" aria-hidden="true">
-      <text x="13" y="10" text-anchor="middle">N</text>
-      <path class="half-open" d="M13 16 L4 50 L13 42 Z" />
-      <path class="half-solid" d="M13 16 L22 50 L13 42 Z" />
-    </svg>
     <p class="footer-label">
       &copy; {{ site.time | date: "%Y" }} {{ site.title }}
     </p>

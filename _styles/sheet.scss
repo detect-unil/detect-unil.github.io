@@ -17,7 +17,11 @@
     display: block;
     position: fixed;
     inset: 26px;
-    z-index: 30;
+    // the title block is printed in the top margin, so the neat line is ruled
+    // below it, and it passes behind the header and behind the legend rather
+    // than across either of them
+    top: 76px;
+    z-index: 5;
     border: solid 1px color-mix(in srgb, var(--light-gray) 80%, transparent);
     pointer-events: none;
   }

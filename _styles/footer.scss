@@ -73,29 +73,6 @@ footer:before {
   font-size: 1.05rem;
 }
 
-.north-arrow {
-  width: 26px;
-  height: 54px;
-  margin-bottom: 16px;
-}
-
-.north-arrow text {
-  fill: var(--gray);
-  font-family: var(--code);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-}
-
-.north-arrow .half-open {
-  fill: none;
-  stroke: var(--text);
-  stroke-width: 1.2;
-}
-
-.north-arrow .half-solid {
-  fill: var(--text);
-}
-
 @media (max-width: $narrow) {
   footer {
     grid-template-columns: 1fr;
@@ -108,7 +85,4 @@ footer:before {
     text-align: left;
   }
 
-  .north-arrow {
-    display: none;
-  }
 }
