@@ -1,0 +1,86 @@
+---
+---
+
+// Timeline used by the News page and the homepage news teaser.
+// Added by this site (not part of the upstream template).
+
+.news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.news-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0 25px;
+  align-items: start;
+  text-align: left;
+}
+
+.news-when {
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+  line-height: var(--compact);
+  text-align: right;
+  white-space: nowrap;
+  padding-top: 0.15rem;
+}
+
+.news-kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: var(--primary);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: var(--compact);
+}
+
+.news-headline {
+  margin: 0.2rem 0 0;
+  font-weight: var(--semi-bold);
+  line-height: var(--compact);
+}
+
+.news-meta {
+  margin: 0.2rem 0 0;
+  color: var(--dark-gray);
+  font-size: 0.9rem;
+  line-height: var(--compact);
+}
+
+.news-text {
+  margin: 0.4rem 0 0;
+  line-height: var(--compact);
+}
+
+.news-thumb {
+  float: right;
+  width: 110px;
+  margin: 0 0 0.5rem 1rem;
+  border-radius: var(--rounded);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 600px) {
+  .news-item {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+  .news-when {
+    text-align: left;
+    padding-top: 0;
+  }
+  .news-thumb {
+    float: none;
+    display: block;
+    width: 100%;
+    max-width: 220px;
+    margin: 0.5rem 0 0;
+  }
+}

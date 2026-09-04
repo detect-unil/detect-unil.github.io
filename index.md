@@ -28,8 +28,7 @@ Integration of these field-based and computational approaches can deliver better
 
 ## Latest news
 
-{% include post-excerpt.html lookup="move-suite-licenses" %}
-{% include post-excerpt.html lookup="website-launch" %}
+{% include news-list.html limit=4 %}
 
 {%
   include button.html

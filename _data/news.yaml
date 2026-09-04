@@ -1,0 +1,81 @@
+# ==============================================================================
+#  Group news.  THIS is the file you edit to add news.
+# ==============================================================================
+#
+#  Copy one of the entries below, change it, done. New papers do NOT go here:
+#  anything you add to _data/sources.yaml appears on the News page by itself.
+#
+#  Every entry needs a date, a kind and a title:
+#
+#      - date: "2026-03-14"
+#        kind: conference
+#        title: Three talks at EGU 2026 in Vienna
+#
+#  Keep the quotes around the date, and write it year-month-day.
+#  Order does not matter, the page always sorts newest first.
+#
+#  kind: must be one of these words. It picks the icon and the little label:
+#
+#      fieldwork     conference     teaching     award
+#      software      people         other
+#
+#  You can also add, all optional:
+#
+#      text:   a sentence or two of detail
+#      link:   somewhere to send the reader. Either a page on this site
+#              (write it without a slash, e.g. link: move-licenses) or a
+#              full address elsewhere (e.g. link: https://www.egu.eu)
+#      image:  a picture, upload it to images/news/ first
+#              (e.g. image: images/news/jura-2026.jpg)
+#
+# ==============================================================================
+
+
+- date: "2026-01-17"
+  kind: software
+  title: MOVE Suite educational licences donated by PE Limited
+  link: move-licenses
+  image: images/news/move-suite.png
+  text: >-
+    PE Limited (Petex) has donated ten academic licences of the MOVE Suite to the
+    Institute of Earth Sciences, an in-kind contribution equivalent to
+    £ 1'928'384.01. The licences cover teaching and non-commercial research in
+    Master's and PhD courses.
+
+- date: "2024-09-20"
+  kind: other
+  title: Website launch
+  text: >-
+    The website of the DeTect research group is now online.
+
+
+# ------------------------------------------------------------------------------
+#  Examples, switched off. Delete the '# ' in front of the lines of any one of
+#  these to turn it into a real news entry, then edit it.
+# ------------------------------------------------------------------------------
+
+# - date: "2026-06-15"
+#   kind: fieldwork
+#   title: Fracture mapping campaign in the Wutach Gorge
+#   image: images/news/wutach-2026.jpg
+#   text: >-
+#     Two weeks of scanline and drone surveys through the Muschelkalk aquifer.
+#   link: projects/muschelkalk
+
+# - date: "2026-04-30"
+#   kind: conference
+#   title: DeTect at EGU 2026 in Vienna
+#   text: >-
+#     Talks and posters on fracture network characterisation.
+#   link: https://www.egu.eu/
+
+# - date: "2026-02-01"
+#   kind: people
+#   title: Welcome to our new PhD student
+#   text: >-
+#     Say what they will work on, and link to their page on the Team page.
+#   link: team
+
+# - date: "2026-01-05"
+#   kind: award
+#   title: Best poster prize at the Swiss Geoscience Meeting

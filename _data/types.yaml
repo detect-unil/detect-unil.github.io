@@ -30,6 +30,40 @@ mascot:
   icon: fa-solid fa-dog
   description: Mascot
 
+# news kinds (used by _data/news.yaml)
+
+publication:
+  icon: fa-solid fa-scroll
+  text: New publication
+
+fieldwork:
+  icon: fa-solid fa-mountain-sun
+  text: Fieldwork
+
+conference:
+  icon: fa-solid fa-microphone-lines
+  text: Conference
+
+teaching:
+  icon: fa-solid fa-chalkboard-user
+  text: Teaching
+
+award:
+  icon: fa-solid fa-award
+  text: Award
+
+software:
+  icon: fa-solid fa-code
+  text: Software
+
+people:
+  icon: fa-solid fa-user-plus
+  text: People
+
+other:
+  icon: fa-solid fa-circle-info
+  text: News
+
 # general
 
 link:

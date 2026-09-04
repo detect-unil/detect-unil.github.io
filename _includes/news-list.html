@@ -1,0 +1,87 @@
+{% comment %}
+  Merged news timeline. Added by this site, not part of the upstream template.
+
+  Combines two sources, newest first:
+    1. _data/news.yaml            hand-written items (fieldwork, conferences, ...)
+    2. _data/citations.yaml       recent publications, surfaced automatically
+
+  How recent a publication has to be is set by `news_publication_years` in
+  _config.yaml. Publications older than that stay on the Publications page only.
+
+  Optional parameter:  limit=3   show only the newest N items
+{% endcomment %}
+
+{% assign empty_list = "" | split: "," %}
+
+{% assign manual = site.data.news | default: empty_list %}
+
+{% assign years_back = site.news_publication_years | default: 2 %}
+{% assign year_now = site.time | date: "%Y" | plus: 0 %}
+{% assign cutoff_year = year_now | minus: years_back %}
+{% capture cutoff %}{{ cutoff_year }}-01-01{% endcapture %}
+{% assign fresh_papers = site.data.citations
+  | default: empty_list
+  | where_exp: "paper", "paper.date >= cutoff"
+%}
+
+{% assign items = manual | concat: fresh_papers | sort: "date" | reverse %}
+{% assign shown = include.limit | default: 9999 | plus: 0 %}
+
+<ul class="news-list">
+  {% for item in items limit: shown %}
+
+    {% comment %} items from citations.yaml have authors; news.yaml items have a kind {% endcomment %}
+    {% if item.kind %}
+      {% assign kind = item.kind %}
+    {% else %}
+      {% assign kind = "publication" %}
+    {% endif %}
+    {% assign type = site.data.types[kind] | default: site.data.types["other"] %}
+
+    <li class="news-item">
+      <div class="news-when">
+        {{ item.date | date: "%-d %b %Y" }}
+      </div>
+
+      <div>
+        <span class="news-kind">
+          {% include icon.html icon=type.icon %}{{ type.text }}
+        </span>
+
+        {% if item.image %}
+          <img
+            class="news-thumb"
+            src="{{ item.image | relative_url | uri_escape }}"
+            alt="{{ item.title | regex_strip }}"
+            loading="lazy"
+            {% include fallback.html %}
+          >
+        {% endif %}
+
+        <p class="news-headline">
+          {% if item.link %}
+            {% if item.link contains "://" %}
+              {% assign href = item.link %}
+            {% else %}
+              {% assign href = item.link | relative_url %}
+            {% endif %}
+            <a href="{{ href | uri_escape }}">{{ item.title }}</a>
+          {% else %}
+            {{ item.title }}
+          {% endif %}
+        </p>
+
+        {% if item.authors %}
+          <p class="news-meta">
+            {{ item.authors | join: ", " }}{% if item.publisher %} · {{ item.publisher }}{% endif %}
+          </p>
+        {% endif %}
+
+        {% if item.text %}
+          <p class="news-text">{{ item.text | markdownify | remove: "<p>" | remove: "</p>" }}</p>
+        {% endif %}
+      </div>
+    </li>
+
+  {% endfor %}
+</ul>

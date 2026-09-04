@@ -75,3 +75,6 @@ jekyll-spaceship:
   mathjax-processor:
     src:
       - https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js
+
+# how many years back publications are also shown as news
+news_publication_years: 2

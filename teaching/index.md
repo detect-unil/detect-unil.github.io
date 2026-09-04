@@ -30,5 +30,5 @@ PE Limited (Petex), for use in Master's and PhD teaching, tutorials and non-comm
 
 {% include section.html %}
 
-TODO: Anindita / Sofia — are there Master's or PhD courses to list here (for example a
-MOVE-based structural modelling practical), and which semester does Structural geology run in?
+TODO: Anindita / Sofia. Are there Master's or PhD courses to list here, for example a
+MOVE-based structural modelling practical? And which semester does Structural geology run in?

@@ -33,7 +33,9 @@ Géopolis, Quartier Mouline, 1015 Lausanne, Switzerland
 
 ## Group leader
 
-Prof. Anindita Samsu — [Anindita.Samsu@unil.ch](mailto:Anindita.Samsu@unil.ch) — Office Géopolis 4885
+Prof. Anindita Samsu
+[Anindita.Samsu@unil.ch](mailto:Anindita.Samsu@unil.ch)
+Office Géopolis 4885
 
 ## Getting here
 
