@@ -1,6 +1,6 @@
 .to-top {
   position: fixed;
-  left: max(var(--gutter), 44px);
+  right: max(var(--gutter), 44px);
   bottom: 44px;
   z-index: 26;
   display: flex;
