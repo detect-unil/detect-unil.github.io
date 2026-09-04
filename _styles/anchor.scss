@@ -1,16 +1,18 @@
 ---
 ---
 
+// Sized in rem, not em, so the link glyph stays the same discreet size next to
+// an h1 as it does next to an h6 rather than scaling up with the heading.
 .anchor {
   display: inline-block;
   position: relative;
-  top: -0.15em;
-  left: 0.5em;
+  top: -0.1em;
+  left: 0.5rem;
   width: 0;
   margin: 0 !important;
   color: var(--primary) !important;
   opacity: 0;
-  font-size: 0.75em !important;
+  font-size: 0.8rem !important;
   text-decoration: none;
   transition: opacity var(--transition), color var(--transition);
 }
