@@ -45,8 +45,11 @@ jobs:
         with:
           folder: _site
           # keep folders the live build does not produce: pull request
-          # previews, and the redesign branch published at /test/
+          # previews, and the three redesign branches published at /test/,
+          # /test2/ and /test3/
           clean-exclude: |
             ${{ env.PREVIEWS_FOLDER }}
             test
+            test2
+            test3
           force: false
