@@ -1,0 +1,8 @@
+# ORCID iDs of group members. The cite process (_cite/cite.py) pulls every work
+# listed on these records and writes _data/citations.yaml, which the Publications
+# page renders. To add your papers, add them to your own ORCID record.
+- orcid: 0000-0003-3588-2237 # Anindita Samsu
+- orcid: 0000-0002-3660-7889 # Sofia Brisson
+- orcid: 0000-0001-8228-4999 # Alannah Brett
+- orcid: 0009-0006-0145-2852 # Jefter Caldeira
+- orcid: 0000-0001-8572-6553 # Ayoub Fatihi

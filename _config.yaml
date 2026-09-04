@@ -1,0 +1,77 @@
+# site properties and page defaults
+title: DeTect
+subtitle: Deformation and Tectonics · University of Lausanne
+description: The Deformation and Tectonics (DeTect) research group at the Institute of Earth Sciences, University of Lausanne, studies brittle deformation of the Earth's crust and the characterisation of fracture networks, with applications to the energy transition.
+header: images/background.jpg
+footer: images/background.jpg
+proofer: true
+
+# site social media and other links
+links:
+  email: Anindita.Samsu@unil.ch
+  orcid: 0000-0003-3588-2237
+  google-scholar: U_WwG4AAAAAJ
+  github: detect-unil
+
+### jekyll settings
+
+# front matter defaults
+defaults:
+  # all markdown files
+  - scope:
+      path: ""
+    values:
+      layout: default
+  # markdown files in /_members
+  - scope:
+      type: "members"
+    values:
+      layout: member
+  # markdown files in /_posts
+  - scope:
+      type: "posts"
+    values:
+      layout: post
+
+collections:
+  # generate page for each member
+  members:
+    output: true
+  # generate page for each post
+  posts:
+    output: true
+
+# jekyll plugins
+plugins:
+  - jekyll-spaceship
+  - jekyll-sitemap
+  - jekyll-redirect-from
+  - jekyll-feed
+  - jekyll-last-modified-at
+
+# code block syntax highlighting
+highlighter: rouge
+
+# jekyll theme
+theme: null
+
+# sass settings
+sass:
+  sass_dir: _styles
+
+# force jekyll to include certain files/folders
+include:
+  - _styles
+  - _scripts
+
+# force jekyll to exclude certain files/folders
+exclude:
+  - README.md
+  - LICENSE.md
+  - TODO.md
+
+# configure jekyll spaceship
+jekyll-spaceship:
+  mathjax-processor:
+    src:
+      - https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js

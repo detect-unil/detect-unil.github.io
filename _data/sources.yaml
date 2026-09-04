@@ -1,0 +1,12 @@
+# Manually-specified publications, and corrections/exclusions for works imported
+# from ORCID. Empty on purpose: everything on the Publications page comes from the
+# ORCID records listed in _data/orcid.yaml.
+#
+# To hide a work that ORCID imported, add its id here with `remove: true`:
+#   - id: doi:10.5194/egusphere-egu25-13175
+#     remove: true
+#
+# To correct or enrich one, add the fields to override:
+#   - id: doi:10.1016/j.jsg.2026.105640
+#     image: images/projects/muschelkalk.jpg
+[]
