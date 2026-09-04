@@ -18,7 +18,7 @@ button {
   border: solid 1px var(--primary);
   border-radius: 0;
   background: var(--primary);
-  color: var(--invert);
+  color: var(--background);
   text-align: center;
   font: inherit;
   font-family: var(--code);

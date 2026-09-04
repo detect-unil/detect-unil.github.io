@@ -31,7 +31,7 @@ body:after {
 
 ::selection {
   background: var(--primary);
-  color: var(--invert);
+  color: var(--background);
 }
 
 /*# sourceMappingURL=body.css.map */

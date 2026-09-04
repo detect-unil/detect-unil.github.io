@@ -54,7 +54,7 @@
   align-items: center;
   width: 28px;
   height: 28px;
-  color: var(--invert);
+  color: var(--background);
   background: var(--primary);
   font-size: 11px;
   box-shadow: none;
