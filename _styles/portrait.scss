@@ -5,47 +5,73 @@
   display: contents;
 }
 
+// list.html emits a run of portraits with no wrapper of its own, so pages
+// put them in .people to get a grid rather than an inline-block flow
+.people {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 34px 24px;
+  margin: 30px 0 40px 0;
+}
+
+.people .portrait {
+  width: 100%;
+  max-width: unset;
+  margin: 0;
+}
+
+.people:has(.portrait[data-style="small"]) {
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+}
+
 .portrait {
   position: relative;
   display: inline-flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: column;
-  margin: 20px;
-  width: 175px;
-  max-width: calc(100% - 20px - 20px);
+  margin: 0 24px 34px 0;
+  width: 180px;
+  max-width: calc(100% - 20px);
+  text-align: left;
   text-decoration: none;
+  vertical-align: top;
 }
 
 .portrait[data-style="small"] {
-  width: 100px;
+  width: 120px;
 }
 
 .portrait[data-style="tiny"] {
   flex-direction: row;
-  gap: 15px;
+  align-items: center;
+  gap: 12px;
   width: unset;
-  text-align: left;
+  margin: 0;
 }
 
+// role badge, tucked into the corner of the frame
 .portrait .icon {
   position: absolute;
-  left: 0;
+  right: 0;
   top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(20px + 10%);
-  aspect-ratio: 1 / 1;
-  border-radius: 999px;
-  background: var(--background);
-  box-shadow: var(--shadow);
-  transform: translate(14%, 14%);
+  width: 30px;
+  height: 30px;
+  color: var(--background);
+  background: var(--primary);
+  font-size: 12px;
+  box-shadow: none;
+  border-radius: 0;
+  opacity: 0;
+  transition: opacity var(--transition);
 }
 
-.portrait[data-style="small"] .icon {
-  left: -2px;
-  top: -2px;
+.portrait:hover .icon,
+.portrait:focus-visible .icon {
+  opacity: 1;
 }
 
 .portrait[data-style="tiny"] .icon {
@@ -54,21 +80,75 @@
 
 .portrait-image {
   width: 100%;
-  margin-bottom: 20px;
-  aspect-ratio: 1 / 1;
-  border-radius: 999px;
+  margin-bottom: 14px;
+  aspect-ratio: 4 / 5;
+  border: var(--hairline);
+  border-radius: var(--rounded);
   object-fit: cover;
-  box-shadow: var(--shadow);
+  box-shadow: none;
+  filter: grayscale(0.3);
+  transition: filter var(--transition), border-color var(--transition);
+}
+
+.portrait:hover .portrait-image {
+  border-color: var(--primary);
+  filter: grayscale(0);
+}
+
+[data-dark="true"] .portrait-image[src$=".svg"] {
+  filter: invert(1) grayscale(1);
+  opacity: 0.5;
+}
+
+.portrait[data-style="small"] .portrait-image {
+  aspect-ratio: 1 / 1;
 }
 
 .portrait[data-style="tiny"] .portrait-image {
-  width: 50px;
+  width: 46px;
   margin: 0;
+  aspect-ratio: 1 / 1;
 }
 
 .portrait-name {
+  position: relative;
+  padding-bottom: 8px;
+  color: var(--text);
   font-family: var(--heading);
+  font-size: 1.05rem;
   font-weight: var(--semi-bold);
+  line-height: var(--compact);
+}
+
+.portrait-name:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 26px;
+  height: 2px;
+  background: var(--primary);
+  transition: width var(--transition);
+}
+
+.portrait:hover .portrait-name:after {
+  width: 100%;
+}
+
+.portrait[data-style="tiny"] .portrait-name {
+  padding-bottom: 0;
+}
+
+.portrait[data-style="tiny"] .portrait-name:after {
+  display: none;
+}
+
+.portrait-description,
+.portrait-affiliation {
+  margin-top: 6px;
+  color: var(--dark-gray);
+  font-size: var(--small);
+  line-height: var(--compact);
 }
 
 .portrait[data-style="tiny"] {

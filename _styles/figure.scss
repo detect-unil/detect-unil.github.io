@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   margin: 40px 0;
 }
 
@@ -15,12 +15,16 @@
 }
 
 .figure-image img {
+  border: var(--hairline);
   border-radius: var(--rounded);
   overflow: hidden;
-  box-shadow: var(--shadow);
+  box-shadow: none;
 }
 
 .figure-caption {
-  font-style: italic;
+  color: var(--dark-gray);
+  font-size: var(--small);
+  font-style: normal;
   text-align: center;
+  line-height: var(--compact);
 }

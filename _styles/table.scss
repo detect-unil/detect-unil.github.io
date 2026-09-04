@@ -2,17 +2,29 @@
 ---
 
 table {
-  margin: 40px auto;
+  margin: 40px 0;
   border-collapse: collapse;
   overflow-wrap: anywhere;
+  text-align: left;
 }
 
 th {
+  color: var(--dark-gray);
+  font-family: var(--body);
+  font-size: var(--small);
   font-weight: var(--semi-bold);
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
 }
 
 th,
 td {
-  padding: 10px 15px;
-  border: solid 1px var(--light-gray);
+  padding: 12px 16px;
+  border: none;
+  border-bottom: var(--hairline);
+  line-height: var(--spacing);
+}
+
+thead th {
+  border-bottom: solid 2px var(--text);
 }

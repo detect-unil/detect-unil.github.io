@@ -1,26 +1,44 @@
 ---
 ---
 
-$logo-big: 80px;
-$logo: 40px;
-$big-padding: 100px;
-$collapse: 700px;
-$sticky: true;
+$collapse: 800px;
+$hide-subtitle: 1050px;
+$logo: 34px;
 
 header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-  box-shadow: var(--shadow);
+  gap: 10px 30px;
+  padding: 14px var(--gutter);
+  background: var(--background);
+  background: color-mix(in srgb, var(--background) 90%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: none;
+}
 
-  @if $sticky {
-    position: sticky !important;
-    top: 0;
-    z-index: 10 !important;
-  }
+// the offset marker bed: a bed traced along the foot of the header, cut and
+// displaced by a fault. masked rather than drawn so it follows --primary in
+// both colour modes.
+header:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 6px;
+  background: var(--primary);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='6' viewBox='0 0 720 6'%3E%3Cpath d='M0 4.6H352M357 5.7L365 0.3M370 1.4H720' stroke='%23000' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='6' viewBox='0 0 720 6'%3E%3Cpath d='M0 4.6H352M357 5.7L365 0.3M370 1.4H720' stroke='%23000' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-size: 720px 6px;
+  mask-size: 720px 6px;
+  pointer-events: none;
 }
 
 header a {
@@ -32,14 +50,16 @@ header a {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   flex-basis: 0;
   flex-grow: 1;
+  min-width: 0;
   max-width: 100%;
 }
 
 .logo {
   height: $logo;
+  flex-shrink: 0;
 }
 
 .logo > * {
@@ -51,30 +71,42 @@ header a {
   display: flex;
   justify-content: flex-start;
   align-items: baseline;
-  flex-wrap: wrap;
-  gap: 5px;
+  gap: 12px;
   min-width: 0;
-  font-family: var(--title);
   text-align: left;
 }
 
 .title {
+  font-family: var(--title);
   font-size: var(--large);
+  font-weight: var(--bold);
+  letter-spacing: -0.01em;
 }
 
 .subtitle {
-  opacity: 0.65;
-  font-weight: var(--thin);
+  color: var(--dark-gray);
+  font-family: var(--body);
+  font-size: 0.72rem;
+  font-weight: var(--regular);
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
+  opacity: 1;
+  white-space: nowrap;
+
+  @media (max-width: $hide-subtitle) {
+    display: none;
+  }
 }
 
 .nav-toggle {
   display: none;
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   margin: 0;
   color: var(--text);
   appearance: none;
+  cursor: pointer;
   transition: background var(--transition);
 }
 
@@ -84,7 +116,7 @@ header a {
   left: 50%;
   top: 50%;
   color: var(--text);
-  font-size: 15px;
+  font-size: 16px;
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   transform: translate(-50%, -50%);
@@ -99,70 +131,70 @@ nav {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
-  font-family: var(--heading);
-  text-transform: uppercase;
+  gap: 4px 22px;
+  font-family: var(--body);
+  font-size: 0.95rem;
+  text-transform: none;
 }
 
 nav > a {
-  padding: 5px;
+  position: relative;
+  padding: 6px 0;
+  color: var(--dark-gray);
+  transition: color var(--transition);
+}
+
+// underline grows from the left on hover, sits permanently on the current tab
+nav > a:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
 }
 
 nav > a:hover {
-  color: var(--primary);
+  color: var(--text);
 }
 
-header:not([data-big]) {
-  @media (max-width: $collapse) {
-    justify-content: flex-end;
-
-    .nav-toggle {
-      display: flex;
-    }
-
-    .nav-toggle:not(:checked) + nav {
-      display: none;
-    }
-
-    nav {
-      align-items: flex-end;
-      flex-direction: column;
-      width: 100%;
-    }
-  }
+nav > a:hover:after,
+nav > a[aria-current="page"]:after {
+  transform: scaleX(1);
 }
 
-header[data-big] {
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: $big-padding 20px;
+nav > a[aria-current="page"] {
+  color: var(--text);
+  font-weight: var(--semi-bold);
+}
 
-  @if $sticky {
-    top: unset;
+@media (max-width: $collapse) {
+  header {
+    justify-content: space-between;
   }
 
-  .home {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-toggle:not(:checked) + nav {
+    display: none;
+  }
+
+  nav {
+    align-items: flex-start;
     flex-direction: column;
-    flex-grow: 0;
+    gap: 2px;
+    width: 100%;
+    padding-bottom: 10px;
   }
 
-  .logo {
-    height: $logo-big;
-    flex-shrink: 0;
-  }
-
-  .title-text {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .title {
-    font-size: var(--xxl);
-  }
-
-  .subtitle {
-    font-size: var(--large);
+  nav > a {
+    width: 100%;
+    padding: 8px 0;
   }
 }

@@ -3,7 +3,13 @@
 
 hr {
   margin: 40px 0;
-  background: var(--light-gray);
+  background: none;
   border: none;
-  height: 1px;
+  height: 6px;
+  // tick rule, like the scale bar on a map
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--light-gray) 0 1px,
+    transparent 1px 8px
+  );
 }

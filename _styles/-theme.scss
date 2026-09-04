@@ -1,54 +1,96 @@
 ---
 ---
 
+// DeTect "field notebook" theme.
+//
+// Warm paper and ink, with a single ochre accent. The motifs elsewhere in the
+// stylesheets -- strata bands, an offset marker bed -- are drawn from these
+// same tokens, so changing a colour here changes them too.
+//
+// CAREFUL: _plugins/misc.rb builds the Google Fonts URL by regex-scanning this
+// file. Every quoted string in here is treated as a font family, and every bare
+// three-digit value as a font weight. Do not add quoted values that are not
+// font names, and note that a three-word family name (e.g. "IBM Plex Mono")
+// produces a broken URL because only the first space is escaped.
+
 // colors
 [data-dark="false"] {
-  --primary: #0795d9;
-  --secondary: #7dd3fc;
-  --text: #000000;
-  --background: #ffffff;
-  --background-alt: #fafafa;
-  --light-gray: #e0e0e0;
-  --gray: #808080;
-  --dark-gray: #404040;
-  --overlay: #00000020;
+  // paper
+  --primary: #a8500c;
+  --secondary: #e8dcc6;
+  --text: #14110d;
+  --background: #faf7f0;
+  --background-alt: #f4efe4;
+  --light-gray: #ddd2bf;
+  --gray: #8b8173;
+  --dark-gray: #585046;
+  --overlay: #14110d1f;
+  --tint: #a8500c14;
+  --invert: #14110d;
+  --invert-text: #faf7f0;
 }
 [data-dark="true"] {
-  --primary: #0795d9;
-  --secondary: #075985;
-  --text: #ffffff;
-  --background: #181818;
-  --background-alt: #1c1c1c;
-  --light-gray: #404040;
-  --gray: #808080;
-  --dark-gray: #b0b0b0;
-  --overlay: #ffffff10;
+  // ink
+  --primary: #e08a3c;
+  --secondary: #3a3227;
+  --text: #f0e9dc;
+  --background: #17150f;
+  --background-alt: #1e1b14;
+  --light-gray: #3a352b;
+  --gray: #8b8173;
+  --dark-gray: #b9af9d;
+  --overlay: #f0e9dc1f;
+  --tint: #e08a3c1a;
+  --invert: #0e0d09;
+  --invert-text: #f0e9dc;
 }
 
 :root {
   // font families
-  --title: "Barlow", sans-serif;
-  --heading: "Barlow", sans-serif;
-  --body: "Barlow", sans-serif;
+  --title: "Fraunces", Georgia, serif;
+  --heading: "Fraunces", Georgia, serif;
+  --body: "Inter", system-ui, sans-serif;
   --code: "Roboto Mono", monospace;
 
-  // font sizes
-  --large: 1.2rem;
-  --xl: 1.4rem;
-  --xxl: 1.6rem;
+  // font sizes, fluid between phone and desktop
+  --small: 0.85rem;
+  --large: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  --xl: clamp(1.3rem, 1.15rem + 0.7vw, 1.65rem);
+  --xxl: clamp(1.8rem, 1.4rem + 1.8vw, 2.9rem);
 
   // font weights
-  --thin: 200;
+  --thin: 300;
   --regular: 400;
   --semi-bold: 500;
-  --bold: 600;
+  --bold: 700;
 
   // text line spacing
-  --spacing: 2;
-  --compact: 1.5;
+  --spacing: 1.75;
+  --compact: 1.45;
+
+  // layout
+  --page: 1100px;
+  --gutter: clamp(20px, 5vw, 60px);
+  --stack: clamp(40px, 6vw, 80px);
 
   // effects
-  --rounded: 3px;
-  --shadow: 0 0 10px 0 var(--overlay);
+  --rounded: 2px;
+  --hairline: solid 1px var(--light-gray);
+  --shadow: 0 4px 20px -8px var(--overlay);
   --transition: 0.2s ease;
+  --letter-caps: 0.12em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition: 0s linear;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
 }

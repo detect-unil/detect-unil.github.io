@@ -1,19 +1,55 @@
 ---
 ---
 
-footer {
+footer,
+footer.background {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
-  padding: 40px;
+  gap: 22px;
+  padding: var(--stack) var(--gutter);
+  background: var(--invert);
+  color: var(--invert-text);
   line-height: var(--spacing);
-  box-shadow: var(--shadow);
+  text-align: center;
+  box-shadow: none;
+}
+
+// the header photo, held back to a texture rather than a picture
+footer.background:before {
+  opacity: 0.14;
+  filter: grayscale(1) contrast(1.2);
+}
+
+// marker bed again, this time along the top edge of the footer
+footer:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 6px;
+  background: var(--primary);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='6' viewBox='0 0 720 6'%3E%3Cpath d='M0 4.6H352M357 5.7L365 0.3M370 1.4H720' stroke='%23000' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='6' viewBox='0 0 720 6'%3E%3Cpath d='M0 4.6H352M357 5.7L365 0.3M370 1.4H720' stroke='%23000' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-size: 720px 6px;
+  mask-size: 720px 6px;
+  pointer-events: none;
+}
+
+footer > div:last-of-type {
+  color: var(--invert-text);
+  font-size: var(--small);
+  letter-spacing: 0.02em;
+  opacity: 0.75;
 }
 
 footer a {
-  color: var(--text) !important;
+  color: var(--invert-text) !important;
+  text-decoration: none;
 }
 
 footer a:hover {
@@ -22,4 +58,12 @@ footer a:hover {
 
 footer .icon {
   font-size: var(--xl);
+}
+
+footer .button[data-style="bare"] {
+  border-bottom-color: transparent;
+}
+
+footer .button[data-style="bare"]:hover {
+  border-bottom-color: var(--primary);
 }

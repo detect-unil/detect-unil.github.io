@@ -1,0 +1,192 @@
+---
+---
+
+// Homepage hero and the two research axes.
+// Added by this site, not part of the upstream template.
+
+$wrap: 900px;
+
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(30px, 5vw, 70px);
+  padding: clamp(50px, 8vw, 100px)
+    max(var(--gutter), calc((100% - var(--page)) / 2));
+}
+
+// faint ruled paper, bled to the full width of the viewport behind the hero
+.hero:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.6;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--light-gray) 0 1px,
+    transparent 1px 34px
+  );
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 35%, #000 65%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 35%, #000 65%, transparent);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.hero-eyebrow {
+  margin: 0 0 18px 0;
+  color: var(--dark-gray);
+  font-size: var(--small);
+  font-weight: var(--semi-bold);
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
+  line-height: var(--compact);
+}
+
+.hero-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 1.4rem + 3.2vw, 4.1rem);
+  font-weight: var(--semi-bold);
+  letter-spacing: -0.025em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.hero-lead {
+  max-width: 34em;
+}
+
+.hero-lead p {
+  margin: 24px 0 0 0;
+  font-size: var(--large);
+  color: var(--dark-gray);
+  line-height: var(--spacing);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 32px 0 0 -5px;
+}
+
+// duotone field panel: greyscaled and multiplied over the accent, so the
+// photograph reads as ink on paper rather than as a stock landscape
+.hero-figure {
+  position: relative;
+  align-self: stretch;
+  min-height: 260px;
+  background: var(--text);
+  border: var(--hairline);
+  overflow: hidden;
+}
+
+.hero-figure img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.06);
+}
+
+// ochre wash, so the photograph sits in the palette instead of shouting
+.hero-figure:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--primary);
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+[data-dark="true"] .hero-figure img {
+  opacity: 0.75;
+}
+
+[data-dark="true"] .hero-figure:before {
+  opacity: 0.4;
+}
+
+// scale-bar ticks along the foot of the panel
+.hero-figure:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  height: 5px;
+  background: var(--background);
+  opacity: 0.55;
+  -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 1px, transparent 1px 26px);
+  mask-image: repeating-linear-gradient(90deg, #000 0 1px, transparent 1px 26px);
+}
+
+@media (max-width: $wrap) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-figure {
+    order: -1;
+    min-height: 180px;
+    max-height: 230px;
+  }
+}
+
+// research axes
+
+.axes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 50px);
+  margin: 34px 0 40px 0;
+}
+
+.axis {
+  padding-top: 18px;
+  border-top: solid 2px var(--text);
+}
+
+.axis-number {
+  display: block;
+  color: var(--primary);
+  font-family: var(--heading);
+  font-size: 1.6rem;
+  font-weight: var(--semi-bold);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.axis-label {
+  margin: 10px 0 0 0 !important;
+  font-family: var(--heading);
+  font-size: var(--large);
+  font-weight: var(--semi-bold);
+  line-height: var(--compact);
+}
+
+.axis-text {
+  margin: 8px 0 0 0 !important;
+  color: var(--dark-gray);
+  line-height: var(--spacing);
+}
+
+@media (max-width: 700px) {
+  .axes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

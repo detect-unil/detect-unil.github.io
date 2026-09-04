@@ -1,16 +1,14 @@
 ---
 ---
 
-$page: 1000px;
-$padding: 40px;
-
 section {
-  padding: $padding max($padding, calc((100% - $page) / 2));
+  position: relative;
+  padding: var(--stack) max(var(--gutter), calc((100% - var(--page)) / 2));
   transition: background var(--transition), color var(--transition);
 }
 
 section[data-size="wide"] {
-  padding: $padding;
+  padding: var(--stack) var(--gutter);
 }
 
 section[data-size="full"] {
@@ -36,4 +34,34 @@ main > section:nth-of-type(odd) {
 
 main > section:nth-of-type(even) {
   background: var(--background-alt);
+}
+
+// every section boundary is marked by a hairline and a fine tick rule,
+// the way a scale bar is drawn on a map sheet
+main > section + section {
+  border-top: var(--hairline);
+}
+
+main > section + section:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 7px;
+  opacity: 0.55;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--light-gray) 0 1px,
+    transparent 1px 9px
+  );
+  pointer-events: none;
+}
+
+section > :first-child {
+  margin-top: 0;
+}
+
+section > :last-child {
+  margin-bottom: 0;
 }

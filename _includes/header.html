@@ -1,21 +1,9 @@
-{% assign image = page.header | default: site.header %}
-{% assign dark = page.header-dark | is_nil: site.header-dark | is_nil: true %}
-
 {% assign svg = "images/logo.svg" | file_exists %}
 {% assign png = "images/logo.png" | file_exists %}
 {% assign jpg = "images/logo.jpg" | file_exists %}
 {% assign logo = svg | default: png | default: jpg | default: nil %}
 
-<header
-  class="background"
-  style="--image: url('{{ image | relative_url | uri_escape }}')"
-  {% if dark == true or dark == false %}
-    data-dark="{{ dark }}"
-  {% endif %}
-  {% if page.url == "/" %}
-    data-big
-  {% endif %}
->
+<header>
   <a href="{{ "/" | relative_url }}" class="home">
     {% if logo %}
       <span class="logo">
@@ -41,17 +29,32 @@
   <input class="nav-toggle" type="checkbox" aria-label="show/hide nav">
 
   <nav>
+    {% assign current = page.url %}
     {% assign pages = site.pages
-      | where_exp: "page", "page.nav"
+      | where_exp: "nav_item", "nav_item.nav"
       | sort: "nav.order"
     %}
-    {% for page in pages %}
-      {% if page.nav %}
+    {% for nav_page in pages %}
+      {% if nav_page.nav %}
+        {% comment %}
+          mark the tab whose folder the current page sits in, so
+          /projects/muschelkalk/ still highlights Projects
+        {% endcomment %}
+        {% assign is_current = false %}
+        {% if current contains nav_page.dir %}
+          {% assign is_current = true %}
+        {% endif %}
+        {% if nav_page.nav.match and current contains nav_page.nav.match %}
+          {% assign is_current = true %}
+        {% endif %}
         <a
-          href="{{ page.dir | relative_url | uri_escape }}"
-          data-tooltip="{{ page.nav.tooltip | xml_escape }}"
+          href="{{ nav_page.dir | relative_url | uri_escape }}"
+          data-tooltip="{{ nav_page.nav.tooltip | xml_escape }}"
+          {% if is_current %}
+            aria-current="page"
+          {% endif %}
         >
-          {{ page.title }}
+          {{ nav_page.title }}
         </a>
       {% endif %}
     {% endfor %}

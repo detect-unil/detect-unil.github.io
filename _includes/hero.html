@@ -1,0 +1,40 @@
+{% comment %}
+  Homepage hero. Added by this site, not part of the upstream template.
+
+  Parameters, all optional:
+    eyebrow   small line above the title
+    title     the h1
+    lead      markdown paragraph under the title
+    actions   captured html, usually a couple of button.html includes
+    image     path to the photograph shown in the duotone panel
+{% endcomment %}
+
+<div class="hero">
+  <div class="hero-text">
+    {% if include.eyebrow %}
+      <p class="hero-eyebrow">{{ include.eyebrow }}</p>
+    {% endif %}
+
+    {% if include.title %}
+      <h1 class="hero-title">{{ include.title }}</h1>
+    {% endif %}
+
+    {% if include.lead %}
+      <div class="hero-lead">{{ include.lead | markdownify }}</div>
+    {% endif %}
+
+    {% if include.actions %}
+      <div class="hero-actions">{{ include.actions }}</div>
+    {% endif %}
+  </div>
+
+  {% if include.image %}
+    <div class="hero-figure" aria-hidden="true">
+      <img
+        src="{{ include.image | relative_url | uri_escape }}"
+        alt=""
+        {% include fallback.html %}
+      >
+    </div>
+  {% endif %}
+</div>
