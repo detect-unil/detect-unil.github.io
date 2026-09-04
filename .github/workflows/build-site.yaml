@@ -44,5 +44,9 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.8.0
         with:
           folder: _site
-          clean-exclude: ${{ env.PREVIEWS_FOLDER }}
+          # keep folders the live build does not produce: pull request
+          # previews, and the redesign branch published at /test/
+          clean-exclude: |
+            ${{ env.PREVIEWS_FOLDER }}
+            test
           force: false
