@@ -26,29 +26,27 @@
   --background: #07090c;
   --background-alt: #0b0e14;
   --light-gray: #1d2531;
-  --gray: #6b7688;
+  --gray: #7d8899;
   --dark-gray: #9aa6b8;
   --overlay: #e9edf31f;
   --tint: #ff5f2e14;
-  --glow: #ff5f2e33;
   --invert: #04060a;
   --invert-text: #e9edf3;
   --field: 1;
 }
 [data-dark="false"] {
   // core tray
-  --primary: #cf3d12;
+  --primary: #bd370f;
   --accent: #0a6f8f;
   --secondary: #dfe3ec;
   --text: #0a0d13;
   --background: #f5f6f9;
   --background-alt: #eaedf3;
   --light-gray: #ccd2de;
-  --gray: #6c7488;
+  --gray: #5e6678;
   --dark-gray: #495163;
   --overlay: #0a0d131f;
-  --tint: #cf3d1210;
-  --glow: #cf3d1226;
+  --tint: #bd370f10;
   --invert: #07090c;
   --invert-text: #f5f6f9;
   // ink on paper carries much further than light on rock, so the field is
