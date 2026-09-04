@@ -1,8 +1,8 @@
 {% comment %}
-  The bottom margin of the sheet: who compiled it and where else to find
-  them. Restyled by this site; upstream prints a photographic band here
-  instead. The north arrow that used to sit here is now the back to top
-  control in _includes/to-top.html.
+  The bottom margin of the sheet: who compiled it, where else to find them,
+  and which printing of it you are reading. Restyled by this site; upstream
+  prints a photographic band here instead. The north arrow that used to sit
+  here is now the back to top control in _includes/to-top.html.
 {% endcomment %}
 
 <footer>
@@ -13,6 +13,22 @@
       Institute of Earth Sciences, Faculty of Geosciences and Environment<br>
       University of Lausanne
     </p>
+
+    {% comment %}
+      The day and night printings of the sheet. It sits in the flow of the
+      footer rather than pinned to a corner of it, so the legend along the
+      bottom margin can never come to rest on top of it.
+    {% endcomment %}
+    <div class="printing">
+      <span class="printing-label">Printing</span>
+      <input
+        type="checkbox"
+        class="dark-toggle"
+        data-tooltip="Switch between the day and night printings"
+        aria-label="toggle dark mode"
+        oninput="onDarkToggleChange(event)"
+      >
+    </div>
   </div>
 
   <div class="footer-block">
@@ -38,11 +54,4 @@
     </p>
   </div>
 
-  <input
-    type="checkbox"
-    class="dark-toggle"
-    data-tooltip="Dark mode"
-    aria-label="toggle dark mode"
-    oninput="onDarkToggleChange(event)"
-  >
 </footer>

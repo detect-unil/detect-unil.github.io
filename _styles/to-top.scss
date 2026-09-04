@@ -7,7 +7,7 @@
 
 .to-top {
   position: fixed;
-  left: max(var(--gutter), 44px);
+  right: max(var(--gutter), 44px);
   // clear of the neat line, and of the legend where the page has one
   bottom: 44px;
   z-index: 26;

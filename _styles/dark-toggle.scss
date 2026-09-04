@@ -1,11 +1,26 @@
 ---
 ---
 
-// day and night printings of the same sheet
+// day and night printings of the same sheet, set in the footer's flow beside
+// its label so that nothing fixed to the bottom of the window can cover it
+.printing {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.printing-label {
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.58rem;
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
+}
+
 .dark-toggle {
-  position: absolute;
-  right: max(var(--gutter), 46px);
-  bottom: 20px;
+  position: relative;
+  flex-shrink: 0;
   width: 46px;
   height: 22px;
   margin: 0;
