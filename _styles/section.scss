@@ -1,6 +1,14 @@
 ---
 ---
 
+// Sections are deliberately translucent: the fracture field runs behind the
+// whole page, and letting a little of it through is what ties the layout to
+// the canvas instead of leaving the canvas stranded at the top.
+
+main {
+  counter-reset: section-index;
+}
+
 section {
   position: relative;
   padding: var(--stack) max(var(--gutter), calc((100% - var(--page)) / 2));
@@ -11,6 +19,7 @@ section[data-size="wide"] {
   padding: var(--stack) var(--gutter);
 }
 
+// the hero: no wash at all, so the field is at full strength behind it
 section[data-size="full"] {
   padding: 0;
 }
@@ -28,16 +37,20 @@ main > section:last-of-type {
   flex-grow: 1;
 }
 
-main > section:nth-of-type(odd) {
-  background: var(--background);
+main > section.background:nth-of-type(odd) {
+  background: color-mix(in srgb, var(--background) 88%, transparent);
 }
 
-main > section:nth-of-type(even) {
-  background: var(--background-alt);
+main > section.background:nth-of-type(even) {
+  background: color-mix(in srgb, var(--background-alt) 90%, transparent);
 }
 
-// every section boundary is marked by a hairline and a fine tick rule,
-// the way a scale bar is drawn on a map sheet
+main > section.background[data-size="full"] {
+  background: none;
+}
+
+// every section boundary is a hairline with a fine tick rule under it, the
+// way a scale is drawn along the edge of a map sheet
 main > section + section {
   border-top: var(--hairline);
 }
@@ -48,12 +61,12 @@ main > section + section:after {
   left: 0;
   right: 0;
   top: 0;
-  height: 7px;
-  opacity: 0.55;
+  height: 6px;
+  opacity: 0.6;
   background-image: repeating-linear-gradient(
     90deg,
     var(--light-gray) 0 1px,
-    transparent 1px 9px
+    transparent 1px 11px
   );
   pointer-events: none;
 }

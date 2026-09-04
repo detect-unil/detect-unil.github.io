@@ -3,190 +3,193 @@
 
 // Homepage hero and the two research axes.
 // Added by this site, not part of the upstream template.
-
-$wrap: 900px;
+//
+// There is no photograph here on purpose: the illustration is the live
+// fracture field on the canvas behind, so the hero only has to stay out of
+// its way and report what it measures.
 
 .hero {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-  align-items: center;
-  gap: clamp(30px, 5vw, 70px);
-  padding: clamp(50px, 8vw, 100px)
-    max(var(--gutter), calc((100% - var(--page)) / 2));
-}
-
-// faint ruled paper, bled to the full width of the viewport behind the hero
-.hero:before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  width: 100vw;
-  margin-left: -50vw;
-  top: 0;
-  bottom: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.6;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    var(--light-gray) 0 1px,
-    transparent 1px 34px
-  );
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 35%, #000 65%, transparent);
-  mask-image: linear-gradient(to bottom, transparent, #000 35%, #000 65%, transparent);
-}
-
-.hero-text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0;
+  justify-content: center;
+  min-height: clamp(520px, 76vh, 820px);
+  padding: clamp(56px, 9vh, 110px)
+    max(var(--gutter), calc((100% - var(--page)) / 2));
 }
 
 .hero-eyebrow {
-  margin: 0 0 18px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 0 clamp(22px, 3vw, 34px) 0;
   color: var(--dark-gray);
-  font-size: var(--small);
+  font-family: var(--code);
+  font-size: 0.68rem;
   font-weight: var(--semi-bold);
   letter-spacing: var(--letter-caps);
   text-transform: uppercase;
   line-height: var(--compact);
 }
 
+// a live station light, because the field behind is genuinely running
+.hero-eyebrow-mark {
+  width: 7px;
+  height: 7px;
+  margin-top: 0.32em;
+  flex: none;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 var(--accent);
+  animation: station 2.6s ease-out infinite;
+}
+
+@keyframes station {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 9px transparent;
+  }
+}
+
 .hero-title {
   margin: 0;
-  font-size: clamp(2.2rem, 1.4rem + 3.2vw, 4.1rem);
-  font-weight: var(--semi-bold);
-  letter-spacing: -0.025em;
-  line-height: 1;
-  text-wrap: balance;
+  font-family: var(--title);
+  font-size: var(--display);
+  font-weight: var(--bold);
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+  text-transform: uppercase;
+  text-wrap: nowrap;
+  text-shadow: 0 6px 34px var(--background);
+}
+
+.hero-line {
+  display: block;
+}
+
+// the second line is offset and drawn as an outline, the way a marker bed is
+// cut and displaced across a fault
+.hero-line-offset {
+  margin-left: clamp(0px, 7vw, 120px);
+  color: transparent;
+  -webkit-text-stroke: clamp(1px, 0.16vw, 2px) var(--text);
+}
+
+@supports not (-webkit-text-stroke: 1px black) {
+  .hero-line-offset {
+    color: var(--dark-gray);
+  }
 }
 
 .hero-lead {
-  max-width: 34em;
+  max-width: 44ch;
 }
 
 .hero-lead p {
-  margin: 24px 0 0 0;
-  font-size: var(--large);
+  margin: clamp(22px, 3vw, 34px) 0 0 0;
   color: var(--dark-gray);
+  font-size: var(--large);
   line-height: var(--spacing);
+  text-shadow: 0 2px 18px var(--background), 0 0 28px var(--background);
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin: 32px 0 0 -5px;
+  margin: clamp(24px, 3vw, 36px) 0 0 -5px;
 }
 
-// duotone field panel: greyscaled and multiplied over the accent, so the
-// photograph reads as ink on paper rather than as a stock landscape
-.hero-figure {
+// scale bar for the field of view the network is generated at
+.hero-scale {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(26px, 3vw, 38px);
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.62rem;
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
+}
+
+.hero-scale-bar {
   position: relative;
-  align-self: stretch;
-  min-height: 260px;
-  background: var(--text);
-  border: var(--hairline);
-  overflow: hidden;
+  width: 130px;
+  height: 7px;
+  border: solid 1px var(--gray);
+  border-top: none;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--gray) 0 1px,
+    transparent 1px 26px
+  );
 }
 
-.hero-figure img {
-  width: 100%;
-  height: 100%;
-  max-height: none;
-  object-fit: cover;
-  filter: grayscale(1) contrast(1.06);
-}
-
-// ochre wash, so the photograph sits in the palette instead of shouting
-.hero-figure:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: var(--primary);
-  mix-blend-mode: multiply;
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-[data-dark="true"] .hero-figure img {
-  opacity: 0.75;
-}
-
-[data-dark="true"] .hero-figure:before {
-  opacity: 0.4;
-}
-
-// scale-bar ticks along the foot of the panel
-.hero-figure:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  height: 5px;
-  background: var(--background);
-  opacity: 0.55;
-  -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 1px, transparent 1px 26px);
-  mask-image: repeating-linear-gradient(90deg, #000 0 1px, transparent 1px 26px);
-}
-
-@media (max-width: $wrap) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr);
+@media (max-width: 720px) {
+  .hero-title {
+    text-wrap: balance;
   }
 
-  .hero-figure {
-    order: -1;
-    min-height: 180px;
-    max-height: 230px;
+  .hero-line-offset {
+    margin-left: 0;
   }
 }
 
-// research axes
+/* ---------- research axes ---------- */
 
 .axes {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(24px, 4vw, 50px);
-  margin: 34px 0 40px 0;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(24px, 3vw, 44px);
+  margin: 36px 0 44px 0;
 }
 
 .axis {
-  padding-top: 18px;
-  border-top: solid 2px var(--text);
+  position: relative;
+  padding: 26px 0 0 0;
+  border-top: solid 2px var(--primary);
 }
 
 .axis-number {
   display: block;
   color: var(--primary);
-  font-family: var(--heading);
-  font-size: 1.6rem;
-  font-weight: var(--semi-bold);
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
+  font-family: var(--code);
+  font-size: 0.72rem;
+  font-weight: var(--bold);
+  letter-spacing: var(--letter-caps);
 }
 
 .axis-label {
-  margin: 10px 0 0 0 !important;
+  margin: 14px 0 0 0;
   font-family: var(--heading);
-  font-size: var(--large);
-  font-weight: var(--semi-bold);
+  font-size: 1.22rem;
+  font-weight: var(--bold);
+  letter-spacing: -0.02em;
   line-height: var(--compact);
+  text-transform: uppercase;
 }
 
 .axis-text {
-  margin: 8px 0 0 0 !important;
+  margin: 12px 0 0 0;
   color: var(--dark-gray);
   line-height: var(--spacing);
 }
 
-@media (max-width: 700px) {
-  .axes {
+// a two-column block for the rose diagram beside a paragraph
+.with-rose {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: clamp(28px, 5vw, 70px);
+  margin: 40px 0;
+}
+
+@media (max-width: 820px) {
+  .with-rose {
     grid-template-columns: minmax(0, 1fr);
   }
 }

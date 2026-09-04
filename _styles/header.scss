@@ -1,9 +1,9 @@
 ---
 ---
 
-$collapse: 800px;
-$hide-subtitle: 1050px;
-$logo: 34px;
+$collapse: 820px;
+$hide-subtitle: 1080px;
+$logo: 30px;
 
 header {
   position: sticky;
@@ -14,30 +14,28 @@ header {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px 30px;
-  padding: 14px var(--gutter);
-  background: var(--background);
-  background: color-mix(in srgb, var(--background) 90%, transparent);
-  backdrop-filter: blur(10px);
+  padding: 13px var(--gutter);
+  border-bottom: var(--hairline);
+  background: color-mix(in srgb, var(--background) 76%, transparent);
+  backdrop-filter: blur(14px) saturate(1.3);
   box-shadow: none;
 }
 
-// the offset marker bed: a bed traced along the foot of the header, cut and
-// displaced by a fault. masked rather than drawn so it follows --primary in
-// both colour modes.
+// a fine ruler along the foot of the bar, so the header reads as the top edge
+// of an instrument rather than as a band of colour
 header:after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 6px;
-  background: var(--primary);
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='6' viewBox='0 0 720 6'%3E%3Cpath d='M0 4.6H352M357 5.7L365 0.3M370 1.4H720' stroke='%23000' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='6' viewBox='0 0 720 6'%3E%3Cpath d='M0 4.6H352M357 5.7L365 0.3M370 1.4H720' stroke='%23000' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
-  -webkit-mask-repeat: repeat-x;
-  mask-repeat: repeat-x;
-  -webkit-mask-size: 720px 6px;
-  mask-size: 720px 6px;
+  height: 5px;
+  opacity: 0.5;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--light-gray) 0 1px,
+    transparent 1px 11px
+  );
   pointer-events: none;
 }
 
@@ -70,27 +68,41 @@ header a {
 .title-text {
   display: flex;
   justify-content: flex-start;
-  align-items: baseline;
-  gap: 12px;
+  align-items: center;
+  gap: 14px;
   min-width: 0;
   text-align: left;
 }
 
 .title {
+  position: relative;
+  padding-left: 16px;
   font-family: var(--title);
-  font-size: var(--large);
+  font-size: 1.05rem;
   font-weight: var(--bold);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+// station light, matching the one in the hero
+.title:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--primary);
+  transform: translateY(-50%);
 }
 
 .subtitle {
-  color: var(--dark-gray);
-  font-family: var(--body);
-  font-size: 0.72rem;
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.6rem;
   font-weight: var(--regular);
   letter-spacing: var(--letter-caps);
   text-transform: uppercase;
-  opacity: 1;
   white-space: nowrap;
 
   @media (max-width: $hide-subtitle) {
@@ -131,28 +143,34 @@ nav {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 4px 22px;
-  font-family: var(--body);
-  font-size: 0.95rem;
-  text-transform: none;
+  gap: 4px 26px;
+  font-family: var(--code);
+  font-size: 0.68rem;
+  font-weight: var(--semi-bold);
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
 }
 
 nav > a {
   position: relative;
-  padding: 6px 0;
-  color: var(--dark-gray);
+  padding: 7px 0;
+  color: var(--gray);
   transition: color var(--transition);
 }
 
-// underline grows from the left on hover, sits permanently on the current tab
+// a tick rule fills in under the tab, left to right
 nav > a:after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 2px;
-  background: var(--primary);
+  height: 4px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--primary) 0 1px,
+    transparent 1px 4px
+  );
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--transition);
@@ -168,8 +186,7 @@ nav > a[aria-current="page"]:after {
 }
 
 nav > a[aria-current="page"] {
-  color: var(--text);
-  font-weight: var(--semi-bold);
+  color: var(--primary);
 }
 
 @media (max-width: $collapse) {
@@ -190,11 +207,11 @@ nav > a[aria-current="page"] {
     flex-direction: column;
     gap: 2px;
     width: 100%;
-    padding-bottom: 10px;
+    padding-bottom: 12px;
   }
 
   nav > a {
     width: 100%;
-    padding: 8px 0;
+    padding: 9px 0;
   }
 }

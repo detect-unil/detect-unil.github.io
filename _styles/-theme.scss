@@ -1,84 +1,96 @@
 ---
 ---
 
-// DeTect "field notebook" theme.
+// DeTect "fracture observatory" theme.
 //
-// Warm paper and ink, with a single ochre accent. The motifs elsewhere in the
-// stylesheets -- strata bands, an offset marker bed -- are drawn from these
-// same tokens, so changing a colour here changes them too.
+// A dark instrument panel rather than a page: near-black rock, a magma accent
+// for anything the reader can act on, and a cyan accent reserved for live,
+// computed things (the fracture field, the rose diagram, the readouts). The
+// motifs elsewhere -- tick rules, node markers, the depth rail -- are drawn
+// from these same tokens, so changing a colour here changes them too.
 //
 // CAREFUL: _plugins/misc.rb builds the Google Fonts URL by regex-scanning this
 // file. Every quoted string in here is treated as a font family, and every bare
 // three-digit value as a font weight. Do not add quoted values that are not
-// font names, and note that a three-word family name (e.g. "IBM Plex Mono")
-// produces a broken URL because only the first space is escaped.
+// font names, do not use a three-word family name (only the first space is
+// escaped), and only use weights that every family below actually ships,
+// in both roman and italic, or the whole font request fails.
 
 // colors
-[data-dark="false"] {
-  // paper
-  --primary: #a8500c;
-  --secondary: #e8dcc6;
-  --text: #14110d;
-  --background: #faf7f0;
-  --background-alt: #f4efe4;
-  --light-gray: #ddd2bf;
-  --gray: #8b8173;
-  --dark-gray: #585046;
-  --overlay: #14110d1f;
-  --tint: #a8500c14;
-  --invert: #14110d;
-  --invert-text: #faf7f0;
-}
 [data-dark="true"] {
-  // ink
-  --primary: #e08a3c;
-  --secondary: #3a3227;
-  --text: #f0e9dc;
-  --background: #17150f;
-  --background-alt: #1e1b14;
-  --light-gray: #3a352b;
-  --gray: #8b8173;
-  --dark-gray: #b9af9d;
-  --overlay: #f0e9dc1f;
-  --tint: #e08a3c1a;
-  --invert: #0e0d09;
-  --invert-text: #f0e9dc;
+  // rock
+  --primary: #ff5f2e;
+  --accent: #3fe0ff;
+  --secondary: #131a24;
+  --text: #e9edf3;
+  --background: #07090c;
+  --background-alt: #0b0e14;
+  --light-gray: #1d2531;
+  --gray: #6b7688;
+  --dark-gray: #9aa6b8;
+  --overlay: #e9edf31f;
+  --tint: #ff5f2e14;
+  --glow: #ff5f2e33;
+  --invert: #04060a;
+  --invert-text: #e9edf3;
+  --field: 1;
+}
+[data-dark="false"] {
+  // core tray
+  --primary: #cf3d12;
+  --accent: #0a6f8f;
+  --secondary: #dfe3ec;
+  --text: #0a0d13;
+  --background: #f5f6f9;
+  --background-alt: #eaedf3;
+  --light-gray: #ccd2de;
+  --gray: #6c7488;
+  --dark-gray: #495163;
+  --overlay: #0a0d131f;
+  --tint: #cf3d1210;
+  --glow: #cf3d1226;
+  --invert: #07090c;
+  --invert-text: #f5f6f9;
+  // ink on paper carries much further than light on rock, so the field is
+  // held back in light mode
+  --field: 0.72;
 }
 
 :root {
   // font families
-  --title: "Fraunces", Georgia, serif;
-  --heading: "Fraunces", Georgia, serif;
-  --body: "Inter", system-ui, sans-serif;
-  --code: "Roboto Mono", monospace;
+  --title: "Archivo", system-ui, sans-serif;
+  --heading: "Archivo", system-ui, sans-serif;
+  --body: "Chivo", system-ui, sans-serif;
+  --code: "JetBrains Mono", monospace;
 
   // font sizes, fluid between phone and desktop
-  --small: 0.85rem;
-  --large: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
-  --xl: clamp(1.3rem, 1.15rem + 0.7vw, 1.65rem);
-  --xxl: clamp(1.8rem, 1.4rem + 1.8vw, 2.9rem);
+  --small: 0.8rem;
+  --large: clamp(1.02rem, 0.97rem + 0.3vw, 1.18rem);
+  --xl: clamp(1.35rem, 1.1rem + 1.1vw, 2rem);
+  --xxl: clamp(2rem, 1.4rem + 2.6vw, 3.6rem);
+  --display: clamp(2.5rem, 1rem + 6.6vw, 6.4rem);
 
   // font weights
-  --thin: 300;
+  --thin: 400;
   --regular: 400;
   --semi-bold: 500;
   --bold: 700;
 
   // text line spacing
-  --spacing: 1.75;
-  --compact: 1.45;
+  --spacing: 1.7;
+  --compact: 1.4;
 
   // layout
-  --page: 1100px;
-  --gutter: clamp(20px, 5vw, 60px);
-  --stack: clamp(40px, 6vw, 80px);
+  --page: 1180px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --stack: clamp(52px, 7vw, 104px);
 
   // effects
-  --rounded: 2px;
+  --rounded: 0px;
   --hairline: solid 1px var(--light-gray);
-  --shadow: 0 4px 20px -8px var(--overlay);
-  --transition: 0.2s ease;
-  --letter-caps: 0.12em;
+  --shadow: 0 18px 50px -30px var(--overlay);
+  --transition: 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
+  --letter-caps: 0.16em;
 }
 
 @media (prefers-reduced-motion: reduce) {

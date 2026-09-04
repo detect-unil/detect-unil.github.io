@@ -9,9 +9,9 @@
 // put them in .people to get a grid rather than an inline-block flow
 .people {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 34px 24px;
-  margin: 30px 0 40px 0;
+  grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+  gap: 38px 22px;
+  margin: 34px 0 44px 0;
 }
 
 .people .portrait {
@@ -21,7 +21,7 @@
 }
 
 .people:has(.portrait[data-style="small"]) {
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
 }
 
 .portrait {
@@ -50,28 +50,31 @@
   margin: 0;
 }
 
-// role badge, tucked into the corner of the frame
+// role badge, tucked into the notch cut out of the frame
 .portrait .icon {
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
-  color: var(--background);
+  width: 28px;
+  height: 28px;
+  color: var(--invert);
   background: var(--primary);
-  font-size: 12px;
+  font-size: 11px;
   box-shadow: none;
   border-radius: 0;
   opacity: 0;
-  transition: opacity var(--transition);
+  transform: translateY(-4px);
+  transition: opacity var(--transition), transform var(--transition);
+  z-index: 2;
 }
 
 .portrait:hover .icon,
 .portrait:focus-visible .icon {
   opacity: 1;
+  transform: none;
 }
 
 .portrait[data-style="tiny"] .icon {
@@ -83,21 +86,35 @@
   margin-bottom: 14px;
   aspect-ratio: 4 / 5;
   border: var(--hairline);
-  border-radius: var(--rounded);
+  border-radius: 0;
   object-fit: cover;
   box-shadow: none;
-  filter: grayscale(0.3);
-  transition: filter var(--transition), border-color var(--transition);
+  // corner cut, so the frame reads as a cropped map sheet rather than a photo
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    0 100%
+  );
+  filter: grayscale(0.85) contrast(1.05);
+  transition: filter var(--transition);
 }
 
-.portrait:hover .portrait-image {
-  border-color: var(--primary);
-  filter: grayscale(0);
+.portrait:hover .portrait-image,
+.portrait:focus-visible .portrait-image {
+  filter: grayscale(0) contrast(1);
+}
+
+// the placeholder silhouette, kept visible enough to read as a frame
+.portrait-image[src$=".svg"] {
+  background: var(--background-alt);
+  opacity: 0.55;
 }
 
 [data-dark="true"] .portrait-image[src$=".svg"] {
   filter: invert(1) grayscale(1);
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .portrait[data-style="small"] .portrait-image {
@@ -105,19 +122,22 @@
 }
 
 .portrait[data-style="tiny"] .portrait-image {
-  width: 46px;
+  width: 44px;
   margin: 0;
   aspect-ratio: 1 / 1;
+  clip-path: none;
 }
 
 .portrait-name {
   position: relative;
-  padding-bottom: 8px;
+  padding-bottom: 9px;
   color: var(--text);
   font-family: var(--heading);
-  font-size: 1.05rem;
-  font-weight: var(--semi-bold);
+  font-size: 1rem;
+  font-weight: var(--bold);
+  letter-spacing: -0.02em;
   line-height: var(--compact);
+  text-transform: uppercase;
 }
 
 .portrait-name:after {
@@ -125,7 +145,7 @@
   position: absolute;
   left: 0;
   bottom: 2px;
-  width: 26px;
+  width: 22px;
   height: 2px;
   background: var(--primary);
   transition: width var(--transition);
@@ -137,6 +157,7 @@
 
 .portrait[data-style="tiny"] .portrait-name {
   padding-bottom: 0;
+  text-transform: none;
 }
 
 .portrait[data-style="tiny"] .portrait-name:after {
@@ -145,9 +166,12 @@
 
 .portrait-description,
 .portrait-affiliation {
-  margin-top: 6px;
-  color: var(--dark-gray);
-  font-size: var(--small);
+  margin-top: 7px;
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.62rem;
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
   line-height: var(--compact);
 }
 

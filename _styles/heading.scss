@@ -7,45 +7,45 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 40px 0 20px 0;
+  margin: 44px 0 20px 0;
   font-family: var(--heading);
-  font-weight: var(--semi-bold);
+  font-weight: var(--bold);
   text-align: left;
   text-wrap: balance;
-  letter-spacing: -0.005em;
-  line-height: 1.15;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
 }
 
 h1 {
-  margin: 0 0 30px 0;
+  margin: 0 0 32px 0;
   font-size: var(--xxl);
-  font-weight: var(--semi-bold);
-  text-transform: none;
-  letter-spacing: -0.015em;
-  line-height: 1.05;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+  text-transform: uppercase;
 }
 
-// short accent rule above every h2, in place of the template's full-width underline.
-// flow-root keeps the h2 box (and so the rule) clear of a floated portrait,
-// which the member layout puts alongside the text.
+// every h2 opens a numbered run, the way sections are numbered in a report:
+// a rule across the column, then the index, then the heading itself
 h2 {
   position: relative;
   display: flow-root;
   margin-top: var(--stack);
-  padding-top: 18px;
+  padding-top: 22px;
+  border-top: var(--hairline);
   border-bottom: none;
   font-size: var(--xl);
-  font-weight: var(--semi-bold);
+  text-transform: uppercase;
 }
 
 h2:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 44px;
-  height: 2px;
-  background: var(--primary);
+  counter-increment: section-index;
+  content: counter(section-index, decimal-leading-zero) " / ";
+  color: var(--primary);
+  font-family: var(--code);
+  font-size: 0.5em;
+  font-weight: var(--semi-bold);
+  letter-spacing: 0.12em;
+  vertical-align: 0.38em;
 }
 
 h3 {
@@ -53,11 +53,11 @@ h3 {
 }
 
 h4 {
-  font-size: 1.15rem;
+  font-size: 1.14rem;
 }
 
 h5 {
-  font-size: 1.05rem;
+  font-size: 1.04rem;
 }
 
 h6 {
@@ -65,19 +65,19 @@ h6 {
 }
 
 :where(h1, h2, h3, h4, h5, h6) > .icon:not(.anchor) {
-  margin-right: 0.5em;
+  margin-right: 0.45em;
   color: var(--primary);
-  font-size: 0.7em;
-  opacity: 0.8;
-  vertical-align: 0.1em;
+  font-size: 0.62em;
+  opacity: 0.9;
+  vertical-align: 0.12em;
 }
 
 // section headings emitted by list.html when data spans several years
 main h3[id] {
-  margin-top: 50px;
-  color: var(--dark-gray);
-  font-family: var(--body);
-  font-size: var(--small);
+  margin-top: 54px;
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.72rem;
   font-weight: var(--semi-bold);
   letter-spacing: var(--letter-caps);
   text-transform: uppercase;

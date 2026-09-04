@@ -7,7 +7,7 @@ title: Deformation and Tectonics
 {% assign lead = site.members | where: "slug", "anindita-samsu" | first %}
 
 {% capture hero_lead %}
-Welcome to the home of the Deformation and Tectonics research group at the Institute of Earth Sciences, University of Lausanne, led by [Anindita Samsu]({{ lead.url | relative_url }}).
+The Deformation and Tectonics group at the Institute of Earth Sciences, University of Lausanne, led by [Anindita Samsu]({{ lead.url | relative_url }}). We read the fracture networks that cut the Earth's crust, in the field and in the data.
 {% endcapture %}
 
 {% capture hero_actions %}
@@ -30,11 +30,11 @@ Welcome to the home of the Deformation and Tectonics research group at the Insti
 
 {%
   include hero.html
-  eyebrow="Institute of Earth Sciences · University of Lausanne"
-  title="Deformation and Tectonics"
+  eyebrow="Institute of Earth Sciences · University of Lausanne · 46.5217°N 6.5793°E"
+  title="Deformation"
+  title2="& Tectonics"
   lead=hero_lead
   actions=hero_actions
-  image="images/background.jpg"
 %}
 
 {% include section.html %}
@@ -58,6 +58,9 @@ Founded in 2023, our group has been active along two research axes:
 %}
 </div>
 
+<div class="with-rose" markdown="0">
+<div markdown="1">
+
 We leverage multi-scale mapping and analyses of field and remotely sensed digital datasets, which record the complex deformation history of the Earth's crust. To enhance the value of these large, high-resolution datasets, we are developing novel geostatistical and deep learning approaches to acquiring and interpreting 2D and 3D data in a geologically meaningful way.
 
 Integration of these field-based and computational approaches can deliver better understanding of fracture systems, providing insights into past and present fluid flow through the crust and de-risking geo-energy projects.
@@ -70,6 +73,13 @@ Integration of these field-based and computational approaches can deliver better
   flip=true
   style="bare"
 %}
+
+</div>
+{%
+  include rose.html
+  caption="Length-weighted rose diagram of the synthetic fracture network drawn behind this page. Two conjugate sets, grown live in your browser from a fixed seed."
+%}
+</div>
 
 {% include section.html %}
 

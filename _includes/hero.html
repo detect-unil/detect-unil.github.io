@@ -1,40 +1,50 @@
 {% comment %}
   Homepage hero. Added by this site, not part of the upstream template.
 
+  The fracture field on the canvas behind this block is the illustration, so
+  the hero itself carries only type, the actions, and a readout of what the
+  field currently measures.
+
   Parameters, all optional:
-    eyebrow   small line above the title
-    title     the h1
+    eyebrow   small monospaced line above the title
+    title     first line of the h1
+    title2    second line of the h1, set offset like a faulted marker bed
     lead      markdown paragraph under the title
     actions   captured html, usually a couple of button.html includes
-    image     path to the photograph shown in the duotone panel
+    readout   set to false to leave off the measurement strip
 {% endcomment %}
 
 <div class="hero">
-  <div class="hero-text">
-    {% if include.eyebrow %}
-      <p class="hero-eyebrow">{{ include.eyebrow }}</p>
-    {% endif %}
-
-    {% if include.title %}
-      <h1 class="hero-title">{{ include.title }}</h1>
-    {% endif %}
-
-    {% if include.lead %}
-      <div class="hero-lead">{{ include.lead | markdownify }}</div>
-    {% endif %}
-
-    {% if include.actions %}
-      <div class="hero-actions">{{ include.actions }}</div>
-    {% endif %}
-  </div>
-
-  {% if include.image %}
-    <div class="hero-figure" aria-hidden="true">
-      <img
-        src="{{ include.image | relative_url | uri_escape }}"
-        alt=""
-        {% include fallback.html %}
-      >
-    </div>
+  {% if include.eyebrow %}
+    <p class="hero-eyebrow">
+      <span class="hero-eyebrow-mark" aria-hidden="true"></span>
+      {{ include.eyebrow }}
+    </p>
   {% endif %}
+
+  {% if include.title %}
+    <h1 class="hero-title">
+      <span class="hero-line">{{ include.title }}</span>
+      {% if include.title2 %}
+        <span class="hero-line hero-line-offset">{{ include.title2 }}</span>
+      {% endif %}
+    </h1>
+  {% endif %}
+
+  {% if include.lead %}
+    <div class="hero-lead">{{ include.lead | markdownify }}</div>
+  {% endif %}
+
+  {% if include.actions %}
+    <div class="hero-actions">{{ include.actions }}</div>
+  {% endif %}
+
+  {% unless include.readout == false %}
+    {% include readout.html %}
+  {% endunless %}
+
+  <div class="hero-scale" aria-hidden="true">
+    <span class="hero-scale-bar"></span>
+    <span class="hero-scale-text">field of view</span>
+  </div>
 </div>

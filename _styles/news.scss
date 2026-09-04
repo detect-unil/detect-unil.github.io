@@ -1,12 +1,14 @@
 ---
 ---
 
-// Timeline used by the News page and the homepage news teaser.
-// Added by this site (not part of the upstream template).
+// Timeline used by the News page and the homepage news teaser, drawn as a
+// core log: a spine down the middle, a node where each entry meets it, and
+// the depth (the date) read off on the left.
+// Added by this site, not part of the upstream template.
 
 .news-list {
   list-style: none;
-  margin: 30px 0 0 0;
+  margin: 34px 0 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -15,33 +17,81 @@
 
 .news-item {
   position: relative;
+  // list.scss puts margin and padding on every li; the spine has to run
+  // unbroken from one entry to the next, so both are cleared here
+  margin: 0;
+  padding-left: 0;
   display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 0 30px;
+  grid-template-columns: 116px 30px minmax(0, 1fr);
+  gap: 0;
   align-items: start;
-  padding: 24px 0;
-  border-top: var(--hairline);
+  padding: 26px 0;
   text-align: left;
+  transition: background var(--transition);
 }
 
-.news-item:last-child {
-  border-bottom: var(--hairline);
-}
-
-// suppress the global list bullet; the timeline rules do the work
 .news-item:before {
   display: none;
 }
 
+// the spine, running the full height of the entry
+.news-item:after {
+  content: "";
+  position: absolute;
+  left: 130px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--light-gray);
+}
+
+.news-item:first-child:after {
+  top: 26px;
+}
+
+.news-item:last-child:after {
+  bottom: calc(100% - 26px);
+}
+
 .news-when {
-  color: var(--dark-gray);
+  grid-column: 1;
+  padding-top: 0.15rem;
+  color: var(--gray);
   font-family: var(--code);
-  font-size: 0.75rem;
-  letter-spacing: 0.02em;
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
   line-height: var(--compact);
   text-align: left;
   white-space: nowrap;
-  padding-top: 0.2rem;
+}
+
+.news-item > div:last-child {
+  grid-column: 3;
+  padding-left: 8px;
+  // contain the floated thumbnail, or it pushes the next entry down and
+  // breaks the spine
+  display: flow-root;
+}
+
+// the node where this entry meets the spine
+.news-item > div:last-child:before {
+  content: "";
+  position: absolute;
+  left: 126px;
+  top: 32px;
+  width: 9px;
+  height: 9px;
+  background: var(--background);
+  border: solid 1px var(--primary);
+  transform: rotate(45deg);
+  transition: background var(--transition), transform var(--transition);
+  z-index: 1;
+}
+
+.news-item:hover > div:last-child:before {
+  background: var(--primary);
+  transform: rotate(45deg) scale(1.35);
 }
 
 .news-kind {
@@ -49,7 +99,8 @@
   align-items: center;
   gap: 0.5em;
   color: var(--primary);
-  font-size: var(--small);
+  font-family: var(--code);
+  font-size: 0.64rem;
   font-weight: var(--semi-bold);
   letter-spacing: var(--letter-caps);
   text-transform: uppercase;
@@ -57,10 +108,11 @@
 }
 
 .news-headline {
-  margin: 0.35rem 0 0;
+  margin: 0.55rem 0 0;
   font-family: var(--heading);
-  font-size: 1.1rem;
-  font-weight: var(--semi-bold);
+  font-size: 1.14rem;
+  font-weight: var(--bold);
+  letter-spacing: -0.02em;
   line-height: var(--compact);
 }
 
@@ -80,35 +132,53 @@
 }
 
 .news-meta {
-  margin: 0.35rem 0 0;
+  margin: 0.4rem 0 0;
   color: var(--dark-gray);
   font-size: 0.9rem;
   line-height: var(--compact);
 }
 
 .news-text {
-  margin: 0.5rem 0 0;
+  margin: 0.55rem 0 0;
   color: var(--dark-gray);
   line-height: var(--spacing);
 }
 
 .news-thumb {
   float: right;
-  width: 110px;
+  width: 108px;
   margin: 0 0 0.5rem 1.5rem;
   border: var(--hairline);
-  border-radius: var(--rounded);
+  border-radius: 0;
   box-shadow: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .news-item {
-    grid-template-columns: 1fr;
-    gap: 0.4rem;
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 0.4rem 0;
+    padding: 22px 0;
   }
+
   .news-when {
-    padding-top: 0;
+    grid-column: 1 / -1;
+    padding-left: 22px;
   }
+
+  .news-item > div:last-child {
+    grid-column: 2;
+    padding-left: 0;
+  }
+
+  .news-item:after {
+    left: 4px;
+  }
+
+  .news-item > div:last-child:before {
+    left: 0;
+    top: 30px;
+  }
+
   .news-thumb {
     float: none;
     display: block;

@@ -1,0 +1,52 @@
+name: deploy-test2
+run-name: Deploy second redesign to /test2/
+
+# Publishes the redesign2 branch to <pages-url>/test2/ so it can be compared
+# side by side with the live site and with the first redesign at /test/.
+# Does not touch the live site, which is built from main by build-site.yaml.
+
+on:
+  # run on commit to redesign2 branch
+  push:
+    branches:
+      - redesign2
+
+  # run manually by user
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-test2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout redesign2 branch contents
+        uses: actions/checkout@v7
+
+      - name: Install Ruby packages
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+          bundler-cache: true
+
+      - name: Get Pages URL
+        id: pages
+        uses: actions/configure-pages@v6
+
+      - name: Set root URL
+        run: |
+          printf "\n\nurl: ${{ steps.pages.outputs.origin }}" >> _config.yaml
+
+      - name: Build test version of site
+        run: |
+          JEKYLL_ENV=production bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/test2"
+
+      - name: Commit test site to Pages branch
+        uses: JamesIves/github-pages-deploy-action@v4.8.0
+        with:
+          folder: _site
+          target-folder: test2
+          commit-message: "Deploy second redesign preview to /test2/"
+          force: false

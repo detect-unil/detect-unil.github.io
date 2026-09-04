@@ -2,6 +2,7 @@
 ---
 
 .card {
+  position: relative;
   display: inline-flex;
   justify-content: stretch;
   align-items: stretch;
@@ -9,19 +10,40 @@
   width: 340px;
   max-width: calc(100% - 20px - 20px);
   margin: 20px 20px 20px 0;
-  background: var(--background);
+  background: color-mix(in srgb, var(--background) 70%, transparent);
   border: var(--hairline);
-  border-radius: var(--rounded);
+  border-radius: 0;
   overflow: hidden;
   box-shadow: none;
   text-align: left;
   vertical-align: top;
-  transition: border-color var(--transition), transform var(--transition);
+  transition: border-color var(--transition), transform var(--transition),
+    background var(--transition);
 }
 
 .card:hover {
   border-color: var(--primary);
-  transform: translateY(-2px);
+  background: var(--background);
+  transform: translateY(-3px);
+}
+
+// a corner bracket that draws itself in on hover
+.card:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 18px;
+  height: 18px;
+  border-right: solid 2px var(--primary);
+  border-bottom: solid 2px var(--primary);
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+
+.card:hover:after {
+  opacity: 1;
 }
 
 .card[data-style="small"] {
@@ -32,7 +54,7 @@
   aspect-ratio: 3 / 2;
   object-fit: cover;
   width: 100%;
-  filter: grayscale(0.25);
+  filter: grayscale(0.75) contrast(1.05);
   transition: filter var(--transition);
 }
 
@@ -47,7 +69,7 @@
   flex-direction: column;
   gap: 12px;
   max-width: 100%;
-  padding: 22px;
+  padding: 24px;
 }
 
 .card-text > * {
@@ -62,7 +84,9 @@
 .card-title {
   font-family: var(--heading);
   font-size: var(--large);
-  font-weight: var(--semi-bold);
+  font-weight: var(--bold);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
   color: var(--text);
   text-decoration: none;
 }
@@ -73,6 +97,9 @@
 
 .card-subtitle {
   margin-top: -6px !important;
-  color: var(--dark-gray);
-  font-style: italic;
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.64rem;
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
 }
