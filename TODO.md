@@ -158,3 +158,32 @@ like a bug even though it is accurate. It sorts itself out as posts are edited o
 
 If you would rather not show it at all, remove `- jekyll-last-modified-at` from the `plugins:`
 list in `_config.yaml` (config only — no template files involved).
+
+## 11. ACTION REQUIRED: let Actions open the weekly citations PR
+
+**The weekly citation refresh currently fails at its last step.** Everything up to that point
+works — I verified it by deleting three publications, running the workflow, and watching it
+regenerate all 30 entries with metadata byte-identical to a local run. But the final step,
+"Open pull request with citations", fails with:
+
+> GitHub Actions is not permitted to create or approve pull requests
+
+This is an **organisation** setting, off by default. An owner of the `detect-unil` org has to
+turn it on:
+
+1. Go to <https://github.com/organizations/detect-unil/settings/actions>
+2. Under **Workflow permissions**, tick
+   **"Allow GitHub Actions to create and approve pull requests"**
+3. Save.
+
+(There is a matching per-repository switch, but the org setting overrides it — the API refuses
+the repository change until the org allows it.)
+
+Until that is done, the Monday-morning `on-schedule` run will keep failing and **you will get a
+failure email every week**. Two things to know in the meantime:
+
+- Publications are **not** stuck. The other path works: any push to `main` runs the same cite
+  process and commits new publications straight to `main`, no PR involved. So editing anything
+  on the site also refreshes the publication list.
+- You can refresh on demand at any time: **Actions → update-citations → Run workflow**. That is
+  the direct-commit path and it succeeds today.

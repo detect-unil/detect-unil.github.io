@@ -193,9 +193,16 @@ The [Publications page](https://detect-unil.github.io/research/) is built automa
 week from the **ORCID** records of the people listed in `_data/orcid.yaml`.
 
 **So: to get your paper onto the website, add it to your own ORCID record** at
-[orcid.org](https://orcid.org/). Within a week a robot opens a "Periodic citation update"
-pull request; anyone can click **Merge** on it and the new paper is live. Nobody should type
-publications into this website by hand — they would be overwritten.
+[orcid.org](https://orcid.org/). It then reaches the website in one of two ways:
+
+- automatically, the next time anyone pushes any change to the site, or
+- on demand — go to the **Actions** tab, pick **update-citations** in the left sidebar, and
+  click **Run workflow**. Takes about a minute.
+
+A weekly robot that opens a "Periodic citation update" pull request is also configured, but it
+needs one organisation setting switched on before it can work — see item 11 in `TODO.md`.
+
+Nobody should type publications into this website by hand — they would be overwritten.
 
 If someone joins the group, add their ORCID iD to `_data/orcid.yaml` as a new line:
 
