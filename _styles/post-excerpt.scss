@@ -1,7 +1,7 @@
 ---
 ---
 
-$thumb-size: 190px;
+$thumb-size: 200px;
 $wrap: 800px;
 
 .post-excerpt-container {
@@ -10,21 +10,18 @@ $wrap: 800px;
 
 .post-excerpt {
   display: flex;
-  margin: 0;
-  border: none;
-  border-bottom: var(--hairline);
-  border-radius: 0;
-  background: none;
+  margin: 20px 0;
+  border-radius: var(--rounded);
+  background: var(--background);
   overflow: hidden;
-  box-shadow: none;
+  box-shadow: var(--shadow);
 }
 
 .post-excerpt-image {
   position: relative;
   width: $thumb-size;
   flex-shrink: 0;
-  margin: 24px 26px 24px 0;
-  border: var(--hairline);
+  // box-shadow: var(--shadow);
 }
 
 .post-excerpt-image img {
@@ -38,8 +35,8 @@ $wrap: 800px;
 .post-excerpt-text {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
-  padding: 24px 0;
+  gap: 20px;
+  padding: 20px 30px;
   text-align: left;
 }
 
@@ -49,15 +46,7 @@ $wrap: 800px;
 
 .post-excerpt-text > a:first-child {
   width: 100%;
-  color: var(--text);
-  font-family: var(--heading);
-  font-size: 1.15rem;
   font-weight: var(--semi-bold);
-  text-decoration: none;
-}
-
-.post-excerpt-text > a:first-child:hover {
-  color: var(--primary);
 }
 
 .post-excerpt-text > div {
@@ -66,7 +55,6 @@ $wrap: 800px;
 
 .post-excerpt-text > p {
   width: 100%;
-  color: var(--dark-gray);
 }
 
 @container (max-width: #{$wrap}) {
@@ -77,6 +65,5 @@ $wrap: 800px;
   .post-excerpt-image {
     width: unset;
     height: $thumb-size;
-    margin: 24px 0 0 0;
   }
 }

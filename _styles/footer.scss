@@ -1,83 +1,114 @@
 ---
 ---
 
-footer,
-footer.background {
+$narrow: 760px;
+
+footer {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 24px;
-  padding: calc(var(--stack) * 1.1) var(--gutter);
-  background: var(--invert);
-  color: var(--invert-text);
-  line-height: var(--spacing);
-  text-align: center;
-  overflow: hidden;
-  box-shadow: none;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr auto;
+  align-items: start;
+  gap: 40px;
+  padding: 54px max(var(--gutter), 46px) 46px;
+  border-top: solid 1px var(--text);
+  background: var(--background-alt);
+  color: var(--text);
 }
 
-// the header photograph, held right back to a texture
-footer.background:before {
-  opacity: 0.1;
-  filter: grayscale(1) contrast(1.3);
-}
-
-// an oversized ghost wordmark, cropped by the slab it sits in
-footer:after {
-  content: "DETECT";
+// the graduated edge, the same one the neat line and the header carry
+footer:before {
+  content: "";
   position: absolute;
-  left: 50%;
-  bottom: -0.14em;
-  color: transparent;
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--invert-text) 16%, transparent);
-  font-family: var(--title);
-  font-size: clamp(4rem, 16vw, 12rem);
-  font-weight: var(--bold);
-  letter-spacing: -0.05em;
-  line-height: 1;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  top: 4px;
+  height: 5px;
+  opacity: 0.55;
   pointer-events: none;
-  user-select: none;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--gray) 0 1px,
+    transparent 1px 24px
+  );
 }
 
-footer > * {
-  position: relative;
-  z-index: 1;
+.footer-block {
+  min-width: 0;
 }
 
-footer > div:last-of-type {
-  color: var(--invert-text);
+.footer-block-end {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.footer-label {
+  margin: 0 0 10px 0;
+  color: var(--gray);
   font-family: var(--code);
-  font-size: 0.66rem;
-  letter-spacing: 0.06em;
+  font-size: 0.58rem;
+  letter-spacing: var(--letter-caps);
   text-transform: uppercase;
-  opacity: 0.6;
 }
 
-footer a {
-  color: var(--invert-text) !important;
-  text-decoration: none;
+.footer-text {
+  margin: 0;
+  color: var(--dark-gray);
+  font-size: 0.92rem;
+  line-height: var(--spacing);
 }
 
-footer a:hover {
-  color: var(--primary) !important;
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: -2px;
 }
 
-footer .icon {
-  font-size: var(--xl);
+.footer-links .button {
+  padding: 0;
+  border: none;
+  font-size: 1.05rem;
 }
 
-footer .button[data-style="bare"] {
-  border-bottom-color: transparent;
+.north-arrow {
+  width: 26px;
+  height: 54px;
+  margin-bottom: 16px;
 }
 
-footer .button[data-style="bare"]:hover {
-  border-bottom-color: var(--primary);
+.north-arrow text {
+  fill: var(--gray);
+  font-family: var(--code);
+  font-size: 10px;
+  letter-spacing: 0.1em;
 }
 
-.dark-toggle {
-  position: relative;
-  z-index: 1;
+.north-arrow .half-open {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.north-arrow .half-solid {
+  fill: var(--text);
+}
+
+@media (max-width: $narrow) {
+  footer {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 40px var(--gutter) 34px;
+  }
+
+  .footer-block-end {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .north-arrow {
+    display: none;
+  }
 }

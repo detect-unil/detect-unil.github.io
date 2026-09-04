@@ -1,0 +1,138 @@
+---
+---
+
+// The neat line: the ruled border a printed map sheet carries, with edge
+// graduations at the same 96px spacing as the graticule ruled across the page
+// in body.scss, and the sheet's marginalia set vertically down both margins.
+//
+// It is a fixed overlay and never takes a click. Below 1100px there is no
+// margin to spare, so the whole frame is dropped.
+
+.sheet-frame {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .sheet-frame {
+    display: block;
+    position: fixed;
+    inset: 26px;
+    z-index: 30;
+    border: solid 1px color-mix(in srgb, var(--light-gray) 80%, transparent);
+    pointer-events: none;
+  }
+
+  // edge graduations, fine ticks with a longer tick on every graticule line
+  .sheet-frame:before,
+  .sheet-frame:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 7px;
+    opacity: 0.75;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        var(--light-gray) 0 1px,
+        transparent 1px 96px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--light-gray) 70%, transparent) 0 1px,
+        transparent 1px 24px
+      );
+    background-size: 100% 100%, 100% 3px;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+  }
+
+  .sheet-frame:before {
+    top: 0;
+  }
+
+  .sheet-frame:after {
+    bottom: 0;
+    transform: scaleY(-1);
+  }
+}
+
+.sheet-margin {
+  position: absolute;
+  top: 50%;
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.58rem;
+  font-weight: var(--regular);
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  opacity: 0.75;
+}
+
+.sheet-margin-left {
+  left: -20px;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.sheet-margin-right {
+  right: -20px;
+  transform: translateY(-50%);
+}
+
+// Lithology fills. Every pattern is drawn in currentColor, so setting the
+// colour of a swatch to a map unit is enough to pattern it.
+
+.swatch {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 22px;
+  height: 11px;
+  border: solid 1px currentColor;
+  background-color: color-mix(in srgb, currentColor var(--wash), transparent);
+  vertical-align: -1px;
+}
+
+.swatch[data-pattern="1"] {
+  background-image: repeating-linear-gradient(
+    45deg,
+    currentColor 0 1px,
+    transparent 1px 4px
+  );
+}
+
+.swatch[data-pattern="2"] {
+  background-image: repeating-linear-gradient(
+    0deg,
+    currentColor 0 1px,
+    transparent 1px 4px
+  );
+}
+
+.swatch[data-pattern="3"] {
+  background-image: radial-gradient(currentColor 0.7px, transparent 0.8px);
+  background-size: 5px 5px;
+}
+
+.swatch[data-pattern="4"] {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    currentColor 0 1px,
+    transparent 1px 4px
+  );
+}
+
+.swatch[data-pattern="5"] {
+  background-image:
+    repeating-linear-gradient(0deg, currentColor 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 9px);
+}
+
+.swatch[data-pattern="6"] {
+  background-image: repeating-linear-gradient(
+    90deg,
+    currentColor 0 1px,
+    transparent 1px 6px
+  );
+}

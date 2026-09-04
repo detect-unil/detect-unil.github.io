@@ -3,21 +3,25 @@
 
 input[type="text"] {
   width: 100%;
-  height: 46px;
+  height: 44px;
   margin: 0;
-  padding: 5px 14px;
+  padding: 5px 12px;
   border: solid 1px var(--light-gray);
-  border-radius: var(--rounded);
+  border-radius: 0;
   background: var(--background);
   color: var(--text);
-  font-family: inherit;
-  font-size: inherit;
+  font-family: var(--code);
+  font-size: 0.78rem;
   appearance: none;
   box-shadow: none;
-  transition: border-color var(--transition);
+  transition: border var(--transition);
 }
 
 input[type="text"]:focus {
   border-color: var(--primary);
   outline: none;
+}
+
+input[type="text"]::placeholder {
+  color: var(--gray);
 }

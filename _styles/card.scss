@@ -1,65 +1,51 @@
 ---
 ---
 
+// Projects are printed as plates too, but landscape and with room for a
+// paragraph: photograph in a mount, caption below it.
+
 .card {
-  position: relative;
   display: inline-flex;
-  justify-content: stretch;
+  justify-content: flex-start;
   align-items: stretch;
   flex-direction: column;
   width: 340px;
-  max-width: calc(100% - 20px - 20px);
-  margin: 20px 20px 20px 0;
-  background: color-mix(in srgb, var(--background) 70%, transparent);
-  border: var(--hairline);
+  max-width: 100%;
+  margin: 30px 30px 0 0;
   border-radius: 0;
-  overflow: hidden;
+  background: none;
   box-shadow: none;
-  text-align: left;
+  overflow: visible;
   vertical-align: top;
-  transition: border-color var(--transition), transform var(--transition),
-    background var(--transition);
-}
-
-.card:hover {
-  border-color: var(--primary);
-  background: var(--background);
-  transform: translateY(-3px);
-}
-
-// a corner bracket that draws itself in on hover
-.card:after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 18px;
-  height: 18px;
-  border-right: solid 2px var(--primary);
-  border-bottom: solid 2px var(--primary);
-  opacity: 0;
-  transition: opacity var(--transition);
-  pointer-events: none;
-}
-
-.card:hover:after {
-  opacity: 1;
 }
 
 .card[data-style="small"] {
   width: 250px;
 }
 
+.card-image {
+  display: block;
+  padding: 5px;
+  border: solid 1px var(--light-gray);
+  background: var(--background);
+  transition: border var(--transition);
+}
+
 .card-image img {
+  display: block;
+  width: 100%;
   aspect-ratio: 3 / 2;
   object-fit: cover;
-  width: 100%;
-  filter: grayscale(0.75) contrast(1.05);
+  filter: saturate(0.8);
   transition: filter var(--transition);
 }
 
+.card:hover .card-image {
+  border-color: var(--primary);
+}
+
 .card:hover .card-image img {
-  filter: grayscale(0);
+  filter: saturate(1);
 }
 
 .card-text {
@@ -67,27 +53,23 @@
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   max-width: 100%;
-  padding: 24px;
+  padding: 16px 0 0 0;
+  text-align: left;
 }
 
 .card-text > * {
   margin: 0 !important;
 }
 
-.card-text > p {
-  color: var(--dark-gray);
-  line-height: var(--spacing);
-}
-
 .card-title {
-  font-family: var(--heading);
-  font-size: var(--large);
-  font-weight: var(--bold);
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
   color: var(--text);
+  font-family: var(--heading);
+  font-size: 1.24rem;
+  font-weight: var(--semi-bold);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
   text-decoration: none;
 }
 
@@ -96,10 +78,16 @@
 }
 
 .card-subtitle {
-  margin-top: -6px !important;
   color: var(--gray);
   font-family: var(--code);
-  font-size: 0.64rem;
+  font-size: 0.58rem;
+  font-style: normal;
   letter-spacing: var(--letter-caps);
   text-transform: uppercase;
+}
+
+.card-text p {
+  color: var(--dark-gray);
+  font-size: 0.98rem;
+  line-height: var(--spacing);
 }

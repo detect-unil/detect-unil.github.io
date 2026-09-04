@@ -3,9 +3,11 @@
 
 blockquote {
   margin: 30px 0;
-  padding: 4px 0 4px 24px;
-  border-left: solid 2px var(--primary);
+  padding: 4px 0 4px 26px;
+  border-left: solid 2px var(--unit, var(--light-gray));
   color: var(--dark-gray);
+  font-size: var(--large);
+  font-style: italic;
 }
 
 blockquote > :first-child {

@@ -2,29 +2,26 @@
 ---
 
 table {
-  margin: 40px 0;
+  margin: 34px 0;
   border-collapse: collapse;
   overflow-wrap: anywhere;
-  text-align: left;
 }
 
 th {
-  color: var(--dark-gray);
-  font-family: var(--body);
-  font-size: var(--small);
-  font-weight: var(--semi-bold);
+  border-bottom: solid 1px var(--text) !important;
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.58rem;
+  font-weight: var(--regular);
   letter-spacing: var(--letter-caps);
   text-transform: uppercase;
 }
 
 th,
 td {
-  padding: 12px 16px;
+  padding: 11px 18px 11px 0;
   border: none;
-  border-bottom: var(--hairline);
-  line-height: var(--spacing);
-}
-
-thead th {
-  border-bottom: solid 2px var(--text);
+  border-bottom: solid 1px var(--light-gray);
+  text-align: left;
+  vertical-align: top;
 }

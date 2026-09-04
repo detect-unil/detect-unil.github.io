@@ -1,6 +1,10 @@
 ---
 ---
 
+// The page is a sheet of paper: a kilometre graticule ruled across the whole
+// of it, and a fine grain over the top so the flat colour reads as stock
+// rather than as an empty buffer.
+
 body {
   position: relative;
   display: flex;
@@ -8,30 +12,41 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--light-gray) 45%, transparent) 0 1px,
+      transparent 1px 96px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--light-gray) 45%, transparent) 0 1px,
+      transparent 1px 96px
+    );
+  background-position: 50% 0;
   color: var(--text);
   font-family: var(--body);
   font-weight: var(--regular);
+  font-size: 1.06rem;
   text-align: left;
   line-height: var(--compact);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-// a very fine grain over the whole page, so the flat dark reads as a surface
-// rather than as an empty buffer. kept under three percent on purpose.
 body:after {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: 20;
-  opacity: 0.025;
+  z-index: 40;
+  opacity: 0.03;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-[data-dark="false"] body:after {
-  opacity: 0.018;
+[data-dark="true"] body:after {
+  opacity: 0.045;
 }
 
 ::selection {

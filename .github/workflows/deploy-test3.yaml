@@ -1,0 +1,53 @@
+name: deploy-test3
+run-name: Deploy third redesign to /test3/
+
+# Publishes the redesign3 branch to <pages-url>/test3/ so it can be compared
+# side by side with the live site and with the earlier redesigns at /test/
+# and /test2/.
+# Does not touch the live site, which is built from main by build-site.yaml.
+
+on:
+  # run on commit to redesign3 branch
+  push:
+    branches:
+      - redesign3
+
+  # run manually by user
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-test3:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout redesign3 branch contents
+        uses: actions/checkout@v7
+
+      - name: Install Ruby packages
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+          bundler-cache: true
+
+      - name: Get Pages URL
+        id: pages
+        uses: actions/configure-pages@v6
+
+      - name: Set root URL
+        run: |
+          printf "\n\nurl: ${{ steps.pages.outputs.origin }}" >> _config.yaml
+
+      - name: Build test version of site
+        run: |
+          JEKYLL_ENV=production bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/test3"
+
+      - name: Commit test site to Pages branch
+        uses: JamesIves/github-pages-deploy-action@v4.8.0
+        with:
+          folder: _site
+          target-folder: test3
+          commit-message: "Deploy third redesign preview to /test3/"
+          force: false

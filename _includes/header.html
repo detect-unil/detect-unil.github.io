@@ -5,6 +5,25 @@
 
 <header>
   <a href="{{ "/" | relative_url }}" class="home">
+    {% comment %}
+      The site mark: an anticline in section, three beds and an axial trace.
+      Drawn here rather than kept as an image file so it takes its colours
+      from the map units in the theme.
+    {% endcomment %}
+    <svg
+      class="sheet-mark"
+      viewBox="0 0 34 23"
+      fill="none"
+      stroke-width="1.7"
+      stroke-linecap="round"
+      aria-hidden="true"
+    >
+      <path class="axis" d="M17 0.5 V 22.5" stroke-width="1" />
+      <path class="bed-1" d="M2 14 C 8 2, 26 2, 32 14" />
+      <path class="bed-2" d="M2 18 C 8 6, 26 6, 32 18" />
+      <path class="bed-3" d="M2 22 C 8 10, 26 10, 32 22" />
+    </svg>
+
     {% if logo %}
       <span class="logo">
         {% if svg %}

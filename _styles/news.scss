@@ -1,189 +1,159 @@
 ---
 ---
 
-// Timeline used by the News page and the homepage news teaser, drawn as a
-// core log: a spine down the middle, a node where each entry meets it, and
-// the depth (the date) read off on the left.
-// Added by this site, not part of the upstream template.
+$narrow: 700px;
+
+// The news list is logged the way a core is logged: a depth axis down the
+// left, the date read off it, and each entry marked on the axis where it
+// falls.
 
 .news-list {
-  list-style: none;
+  position: relative;
   margin: 34px 0 0 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  list-style: none;
 }
 
-.news-item {
-  position: relative;
-  // list.scss puts margin and padding on every li; the spine has to run
-  // unbroken from one entry to the next, so both are cleared here
-  margin: 0;
-  padding-left: 0;
-  display: grid;
-  grid-template-columns: 116px 30px minmax(0, 1fr);
-  gap: 0;
-  align-items: start;
-  padding: 26px 0;
-  text-align: left;
-  transition: background var(--transition);
-}
-
-.news-item:before {
-  display: none;
-}
-
-// the spine, running the full height of the entry
-.news-item:after {
+.news-list:before {
   content: "";
   position: absolute;
-  left: 130px;
-  top: 0;
-  bottom: 0;
+  left: 129px;
+  top: 12px;
+  bottom: 12px;
   width: 1px;
   background: var(--light-gray);
 }
 
-.news-item:first-child:after {
-  top: 26px;
+.news-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 0 44px;
+  margin: 0;
+  padding: 26px 0;
+  border-top: solid 1px var(--light-gray);
 }
 
-.news-item:last-child:after {
-  bottom: calc(100% - 26px);
+.news-item:first-child {
+  border-top: none;
+}
+
+.news-item:before {
+  content: "";
+  position: absolute;
+  left: 124px;
+  top: 32px;
+  width: 11px;
+  height: 11px;
+  border: solid 1px var(--unit);
+  background-color: color-mix(in srgb, var(--unit) var(--wash), var(--background));
+  background-image: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--unit) 60%, transparent) 0 1px,
+    transparent 1px 4px
+  );
 }
 
 .news-when {
-  grid-column: 1;
-  padding-top: 0.15rem;
+  padding-top: 4px;
   color: var(--gray);
   font-family: var(--code);
-  font-size: 0.68rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.03em;
-  line-height: var(--compact);
-  text-align: left;
-  white-space: nowrap;
-}
-
-.news-item > div:last-child {
-  grid-column: 3;
-  padding-left: 8px;
-  // contain the floated thumbnail, or it pushes the next entry down and
-  // breaks the spine
-  display: flow-root;
-}
-
-// the node where this entry meets the spine
-.news-item > div:last-child:before {
-  content: "";
-  position: absolute;
-  left: 126px;
-  top: 32px;
-  width: 9px;
-  height: 9px;
-  background: var(--background);
-  border: solid 1px var(--primary);
-  transform: rotate(45deg);
-  transition: background var(--transition), transform var(--transition);
-  z-index: 1;
-}
-
-.news-item:hover > div:last-child:before {
-  background: var(--primary);
-  transform: rotate(45deg) scale(1.35);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: right;
+  line-height: 1.6;
 }
 
 .news-kind {
   display: inline-flex;
   align-items: center;
-  gap: 0.5em;
-  color: var(--primary);
+  gap: 8px;
+  margin-bottom: 9px;
+  color: var(--gray);
   font-family: var(--code);
-  font-size: 0.64rem;
-  font-weight: var(--semi-bold);
+  font-size: 0.58rem;
   letter-spacing: var(--letter-caps);
   text-transform: uppercase;
-  line-height: var(--compact);
+}
+
+.news-kind .icon {
+  color: var(--primary);
+  font-size: 0.85rem;
 }
 
 .news-headline {
-  margin: 0.55rem 0 0;
+  max-width: 62ch;
+  margin: 0;
   font-family: var(--heading);
-  font-size: 1.14rem;
-  font-weight: var(--bold);
-  letter-spacing: -0.02em;
-  line-height: var(--compact);
+  font-size: 1.16rem;
+  font-weight: var(--semi-bold);
+  letter-spacing: -0.005em;
+  line-height: 1.35;
+  text-wrap: pretty;
 }
 
 .news-headline a {
   color: var(--text);
   text-decoration: none;
-  background-image: linear-gradient(var(--primary), var(--primary));
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0% 1px;
-  transition: background-size var(--transition), color var(--transition);
 }
 
 .news-headline a:hover {
   color: var(--primary);
-  background-size: 100% 1px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }
 
 .news-meta {
-  margin: 0.4rem 0 0;
-  color: var(--dark-gray);
-  font-size: 0.9rem;
-  line-height: var(--compact);
+  max-width: 68ch;
+  margin: 7px 0 0 0;
+  color: var(--gray);
+  font-size: 0.92rem;
+  font-style: italic;
+  line-height: 1.6;
 }
 
 .news-text {
-  margin: 0.55rem 0 0;
+  max-width: 66ch;
+  margin: 9px 0 0 0;
   color: var(--dark-gray);
+  font-size: 0.98rem;
   line-height: var(--spacing);
 }
 
 .news-thumb {
   float: right;
-  width: 108px;
-  margin: 0 0 0.5rem 1.5rem;
-  border: var(--hairline);
-  border-radius: 0;
-  box-shadow: none;
+  width: 96px;
+  height: auto;
+  margin: 0 0 12px 26px;
+  padding: 6px;
+  border: solid 1px var(--light-gray);
+  background: var(--background);
 }
 
-@media (max-width: 700px) {
+@media (max-width: $narrow) {
+  .news-list:before {
+    display: none;
+  }
+
   .news-item {
-    grid-template-columns: 22px minmax(0, 1fr);
-    gap: 0.4rem 0;
+    grid-template-columns: 1fr;
+    gap: 8px;
     padding: 22px 0;
   }
 
+  .news-item:before {
+    display: none;
+  }
+
   .news-when {
-    grid-column: 1 / -1;
-    padding-left: 22px;
-  }
-
-  .news-item > div:last-child {
-    grid-column: 2;
-    padding-left: 0;
-  }
-
-  .news-item:after {
-    left: 4px;
-  }
-
-  .news-item > div:last-child:before {
-    left: 0;
-    top: 30px;
+    padding-top: 0;
+    text-align: left;
   }
 
   .news-thumb {
-    float: none;
-    display: block;
-    width: 100%;
-    max-width: 220px;
-    margin: 0.5rem 0 0;
+    width: 72px;
+    margin-left: 18px;
   }
 }

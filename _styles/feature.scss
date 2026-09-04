@@ -5,8 +5,8 @@ $wrap: 800px;
 
 .feature {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   gap: 40px;
   margin: 40px 0;
 }
@@ -15,10 +15,12 @@ $wrap: 800px;
   flex-shrink: 0;
   width: 40%;
   aspect-ratio: 3 / 2;
-  border: var(--hairline);
-  border-radius: var(--rounded);
-  overflow: hidden;
+  padding: 5px;
+  border: solid 1px var(--light-gray);
+  border-radius: 0;
+  background: var(--background);
   box-shadow: none;
+  overflow: hidden;
 }
 
 .feature-image img {

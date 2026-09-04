@@ -1,15 +1,17 @@
 ---
 ---
 
+// a horizontal rule is a bed contact like any other
 hr {
-  margin: 40px 0;
-  background: none;
+  height: 5px;
+  margin: 46px 0;
   border: none;
-  height: 6px;
-  // tick rule, like the scale bar on a map
+  border-top: solid 1px var(--light-gray);
+  color: var(--unit, var(--light-gray));
+  opacity: 0.7;
   background-image: repeating-linear-gradient(
-    90deg,
-    var(--light-gray) 0 1px,
-    transparent 1px 8px
+    45deg,
+    currentColor 0 1px,
+    transparent 1px 5px
   );
 }

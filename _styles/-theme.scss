@@ -1,13 +1,17 @@
 ---
 ---
 
-// DeTect "fracture observatory" theme.
+// DeTect "map sheet" theme.
 //
-// A dark instrument panel rather than a page: near-black rock, a magma accent
-// for anything the reader can act on, and a cyan accent reserved for live,
-// computed things (the fracture field, the rose diagram, the readouts). The
-// motifs elsewhere -- tick rules, node markers, the depth rail -- are drawn
-// from these same tokens, so changing a colour here changes them too.
+// The site is printed rather than displayed: warm paper, ink, a neat line
+// around the sheet, and marginalia set in a mono face the way a survey sheet
+// carries its scale and grid references. Colour does the work a geological map
+// gives it -- the numbered --unit-* hues are map units, and every section of
+// the site is assigned one, so a section, its legend entry and its band in the
+// cross-section at the top of the homepage all share a colour.
+//
+// The blue accent is deliberate: everything a reader can act on is drawn in
+// water blue, which on a geological map is the one colour never spent on rock.
 //
 // CAREFUL: _plugins/misc.rb builds the Google Fonts URL by regex-scanning this
 // file. Every quoted string in here is treated as a font family, and every bare
@@ -17,56 +21,76 @@
 // in both roman and italic, or the whole font request fails.
 
 // colors
-[data-dark="true"] {
-  // rock
-  --primary: #ff5f2e;
-  --accent: #3fe0ff;
-  --secondary: #131a24;
-  --text: #e9edf3;
-  --background: #07090c;
-  --background-alt: #0b0e14;
-  --light-gray: #1d2531;
-  --gray: #7d8899;
-  --dark-gray: #9aa6b8;
-  --overlay: #e9edf31f;
-  --tint: #ff5f2e14;
-  --invert: #04060a;
-  --invert-text: #e9edf3;
-  --field: 1;
-}
 [data-dark="false"] {
-  // core tray
-  --primary: #bd370f;
-  --accent: #0a6f8f;
-  --secondary: #dfe3ec;
-  --text: #0a0d13;
-  --background: #f5f6f9;
-  --background-alt: #eaedf3;
-  --light-gray: #ccd2de;
-  --gray: #5e6678;
-  --dark-gray: #495163;
-  --overlay: #0a0d131f;
-  --tint: #bd370f10;
-  --invert: #07090c;
-  --invert-text: #f5f6f9;
-  // ink on paper carries much further than light on rock, so the field is
-  // held back in light mode
-  --field: 0.72;
+  // paper
+  --primary: #1a4f9c;
+  --secondary: #e3ddcc;
+  --text: #16181c;
+  --background: #f8f6f0;
+  --background-alt: #f1ede2;
+  --light-gray: #d5cfbe;
+  --gray: #6a665c;
+  --dark-gray: #46443c;
+  --overlay: #16181c1f;
+  --tint: #1a4f9c12;
+  --invert: #14171d;
+  --invert-text: #f8f6f0;
+
+  // map units, in stratigraphic order, youngest first
+  --unit-1: #c8912f;
+  --unit-2: #3f8d84;
+  --unit-3: #7b6aa6;
+  --unit-4: #b34a34;
+  --unit-5: #4a6fa5;
+  --unit-6: #6a8b41;
+
+  // how heavily unit colour is laid down as a fill
+  --wash: 18%;
+  --wash-strong: 30%;
+}
+
+[data-dark="true"] {
+  // the night sheet
+  --primary: #74aaff;
+  --secondary: #222a35;
+  --text: #e7e9ef;
+  --background: #0d1015;
+  --background-alt: #12161d;
+  --light-gray: #2b323d;
+  --gray: #8d93a1;
+  --dark-gray: #aeb4c1;
+  --overlay: #e7e9ef1f;
+  --tint: #74aaff14;
+  --invert: #080a0e;
+  --invert-text: #e7e9ef;
+
+  --unit-1: #e0ad4d;
+  --unit-2: #55b4a9;
+  --unit-3: #a290d2;
+  --unit-4: #e0715b;
+  --unit-5: #7099e0;
+  --unit-6: #9cba5e;
+
+  // light on glass carries further than ink on paper, so the washes are
+  // laid down a little more strongly in the dark
+  --wash: 24%;
+  --wash-strong: 38%;
 }
 
 :root {
   // font families
-  --title: "Archivo", system-ui, sans-serif;
-  --heading: "Archivo", system-ui, sans-serif;
-  --body: "Chivo", system-ui, sans-serif;
-  --code: "JetBrains Mono", monospace;
+  --title: "Newsreader", Georgia, serif;
+  --heading: "Newsreader", Georgia, serif;
+  --body: "Newsreader", Georgia, serif;
+  --code: "Roboto Mono", monospace;
 
   // font sizes, fluid between phone and desktop
-  --small: 0.8rem;
-  --large: clamp(1.02rem, 0.97rem + 0.3vw, 1.18rem);
-  --xl: clamp(1.35rem, 1.1rem + 1.1vw, 2rem);
-  --xxl: clamp(2rem, 1.4rem + 2.6vw, 3.6rem);
-  --display: clamp(2.5rem, 1rem + 6.6vw, 6.4rem);
+  --small: 0.82rem;
+  --tiny: 0.7rem;
+  --large: clamp(1.08rem, 1.02rem + 0.35vw, 1.26rem);
+  --xl: clamp(1.45rem, 1.2rem + 1.1vw, 2.05rem);
+  --xxl: clamp(2rem, 1.55rem + 2.1vw, 3.1rem);
+  --display: clamp(2.7rem, 1.2rem + 6.2vw, 5.8rem);
 
   // font weights
   --thin: 400;
@@ -76,19 +100,20 @@
 
   // text line spacing
   --spacing: 1.7;
-  --compact: 1.4;
+  --compact: 1.45;
 
   // layout
-  --page: 1180px;
-  --gutter: clamp(20px, 5vw, 64px);
-  --stack: clamp(52px, 7vw, 104px);
+  --page: 1120px;
+  --gutter: clamp(20px, 5vw, 56px);
+  --stack: clamp(56px, 7vw, 100px);
+  --rail: 150px;
 
   // effects
   --rounded: 0px;
   --hairline: solid 1px var(--light-gray);
-  --shadow: 0 18px 50px -30px var(--overlay);
+  --shadow: 0 20px 44px -34px var(--overlay);
   --transition: 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
-  --letter-caps: 0.16em;
+  --letter-caps: 0.14em;
 }
 
 @media (prefers-reduced-motion: reduce) {

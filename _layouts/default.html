@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" data-dark="true">
+<html lang="en" data-dark="false">
   {% include head.html %}
   <body>
-    <canvas class="fracture-field" aria-hidden="true"></canvas>
+    {% include sheet-frame.html %}
     {% include header.html %}
     <main>
       {% include content.html content=content %}
     </main>
-    <aside class="depth-rail" aria-hidden="true"></aside>
     {% include footer.html %}
+    <aside class="legend" aria-label="Legend and contents of this page"></aside>
   </body>
 </html>

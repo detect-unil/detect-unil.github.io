@@ -2,41 +2,40 @@
 ---
 
 $collapse: 820px;
-$hide-subtitle: 1080px;
-$logo: 30px;
+
+// The sheet's title block. It stays at the top of the sheet the way a map
+// title stays in its margin, ruled off from the body by a hairline and the
+// same edge graduation the neat line carries.
 
 header {
-  position: sticky;
+  position: sticky !important;
   top: 0;
-  z-index: 10;
+  z-index: 20 !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px 30px;
-  padding: 13px var(--gutter);
-  border-bottom: var(--hairline);
-  background: color-mix(in srgb, var(--background) 76%, transparent);
-  backdrop-filter: blur(14px) saturate(1.3);
-  box-shadow: none;
+  gap: 16px 28px;
+  padding: 13px max(var(--gutter), 46px);
+  border-bottom: solid 1px var(--light-gray);
+  background: color-mix(in srgb, var(--background) 93%, var(--text));
+  backdrop-filter: blur(6px);
 }
 
-// a fine ruler along the foot of the bar, so the header reads as the top edge
-// of an instrument rather than as a band of colour
 header:after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
-  height: 5px;
+  bottom: -5px;
+  height: 4px;
   opacity: 0.5;
+  pointer-events: none;
   background-image: repeating-linear-gradient(
     90deg,
     var(--light-gray) 0 1px,
-    transparent 1px 11px
+    transparent 1px 24px
   );
-  pointer-events: none;
 }
 
 header a {
@@ -49,51 +48,47 @@ header a {
   justify-content: flex-start;
   align-items: center;
   gap: 12px;
-  flex-basis: 0;
-  flex-grow: 1;
   min-width: 0;
-  max-width: 100%;
 }
 
-.logo {
-  height: $logo;
+// the mark: three folded beds, drawn in _includes/header.html
+.sheet-mark {
   flex-shrink: 0;
+  width: 34px;
+  height: 22px;
+  overflow: visible;
 }
 
-.logo > * {
-  width: unset;
-  height: 100%;
+.sheet-mark .bed-1,
+.sheet-mark .bed-2,
+.sheet-mark .bed-3 {
+  stroke: var(--text);
+}
+
+.sheet-mark .bed-3 {
+  stroke: color-mix(in srgb, var(--text) 55%, transparent);
+}
+
+.sheet-mark .axis {
+  stroke: var(--primary);
+  stroke-dasharray: 2 3;
 }
 
 .title-text {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
-  gap: 14px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 14px;
   min-width: 0;
-  text-align: left;
 }
 
 .title {
-  position: relative;
-  padding-left: 16px;
   font-family: var(--title);
-  font-size: 1.05rem;
+  font-size: 1.4rem;
   font-weight: var(--bold);
   letter-spacing: -0.02em;
-  text-transform: uppercase;
-}
-
-// station light, matching the one in the hero
-.title:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 7px;
-  height: 7px;
-  background: var(--primary);
-  transform: translateY(-50%);
+  line-height: 1;
 }
 
 .subtitle {
@@ -103,23 +98,19 @@ header a {
   font-weight: var(--regular);
   letter-spacing: var(--letter-caps);
   text-transform: uppercase;
-  white-space: nowrap;
-
-  @media (max-width: $hide-subtitle) {
-    display: none;
-  }
+  line-height: 1.4;
 }
 
 .nav-toggle {
   display: none;
   position: relative;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   margin: 0;
+  border: solid 1px var(--light-gray);
   color: var(--text);
   appearance: none;
-  cursor: pointer;
-  transition: background var(--transition);
+  transition: border var(--transition);
 }
 
 .nav-toggle:after {
@@ -128,7 +119,7 @@ header a {
   left: 50%;
   top: 50%;
   color: var(--text);
-  font-size: 16px;
+  font-size: 14px;
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   transform: translate(-50%, -50%);
@@ -140,58 +131,58 @@ header a {
 
 nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
-  gap: 4px 26px;
+  gap: 4px 22px;
   font-family: var(--code);
-  font-size: 0.68rem;
-  font-weight: var(--semi-bold);
+  font-size: 0.66rem;
+  font-weight: var(--regular);
   letter-spacing: var(--letter-caps);
   text-transform: uppercase;
 }
 
 nav > a {
   position: relative;
-  padding: 7px 0;
-  color: var(--gray);
+  padding: 6px 0;
+  color: var(--dark-gray);
   transition: color var(--transition);
 }
 
-// a tick rule fills in under the tab, left to right
 nav > a:after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 4px;
-  background-image: repeating-linear-gradient(
-    90deg,
-    var(--primary) 0 1px,
-    transparent 1px 4px
-  );
+  height: 1px;
+  background: currentColor;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--transition);
 }
 
 nav > a:hover {
-  color: var(--text);
+  color: var(--primary);
 }
 
-nav > a:hover:after,
-nav > a[aria-current="page"]:after {
+nav > a:hover:after {
   transform: scaleX(1);
 }
 
 nav > a[aria-current="page"] {
-  color: var(--primary);
+  color: var(--text);
+}
+
+nav > a[aria-current="page"]:after {
+  background: var(--primary);
+  transform: scaleX(1);
 }
 
 @media (max-width: $collapse) {
   header {
     justify-content: space-between;
+    padding: 12px var(--gutter);
   }
 
   .nav-toggle {
@@ -207,11 +198,12 @@ nav > a[aria-current="page"] {
     flex-direction: column;
     gap: 2px;
     width: 100%;
-    padding-bottom: 12px;
+    padding-top: 8px;
+    border-top: solid 1px var(--light-gray);
+    font-size: 0.72rem;
   }
 
   nav > a {
-    width: 100%;
-    padding: 9px 0;
+    padding: 7px 0;
   }
 }

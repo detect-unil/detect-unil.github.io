@@ -4,17 +4,12 @@
 $wrap: 600px;
 
 .float {
-  margin-bottom: 30px;
-  max-width: 50%;
+  margin-bottom: 26px;
+  max-width: min(280px, 45%);
 }
 
 .float > * {
   margin: 0 !important;
-}
-
-.float .portrait {
-  width: 100%;
-  margin: 0;
 }
 
 .float:not([data-flip]) {
@@ -22,9 +17,18 @@ $wrap: 600px;
   margin-right: 44px;
 }
 
+// on a member page the float carries the portrait and the person's links
+.float .portrait {
+  width: 100%;
+}
+
+.float .button-wrapper .button {
+  justify-content: flex-start;
+}
+
 .float[data-flip] {
   float: right;
-  margin-left: 44px;
+  margin-left: 40px;
 }
 
 .float[data-clear] {
@@ -37,7 +41,7 @@ $wrap: 600px;
   .float {
     float: unset !important;
     clear: both !important;
-    margin: 0 0 30px 0 !important;
+    margin: auto !important;
     max-width: unset;
   }
 }

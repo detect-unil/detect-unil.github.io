@@ -1,63 +1,76 @@
 ---
 ---
 
+// Headings are set the way a survey memoir sets them: an editorial serif at
+// display size, and every h2 opening with its own numbered legend box in the
+// colour of the map unit that section belongs to.
+//
+// Unit colours are used for fills, borders and patterns only, never for text
+// or for anything a reader has to read at small size.
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  margin: 44px 0 20px 0;
+  margin: 46px 0 20px 0;
   font-family: var(--heading);
   font-weight: var(--bold);
+  font-variant-numeric: lining-nums;
   text-align: left;
   text-wrap: balance;
-  letter-spacing: -0.03em;
-  line-height: 1.08;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
 }
 
 h1 {
-  margin: 0 0 32px 0;
+  margin: 0 0 28px 0;
   font-size: var(--xxl);
-  letter-spacing: -0.04em;
-  line-height: 0.98;
-  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.025em;
 }
 
-// every h2 opens a numbered run, the way sections are numbered in a report:
-// a rule across the column, then the index, then the heading itself
 h2 {
   position: relative;
-  display: flow-root;
-  margin-top: var(--stack);
-  padding-top: 22px;
-  border-top: var(--hairline);
-  border-bottom: none;
+  margin-top: 6px;
   font-size: var(--xl);
-  text-transform: uppercase;
 }
 
 h2:before {
   counter-increment: section-index;
-  content: counter(section-index, decimal-leading-zero) " / ";
-  color: var(--primary);
+  content: counter(section-index, decimal-leading-zero);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.1em;
+  height: 1.9em;
+  margin-right: 0.85em;
+  border: solid 1px var(--unit);
+  background-color: color-mix(in srgb, var(--unit) var(--wash), transparent);
+  background-image: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--unit) 55%, transparent) 0 1px,
+    transparent 1px 5px
+  );
+  color: var(--text);
   font-family: var(--code);
-  font-size: 0.5em;
+  font-size: 0.4em;
   font-weight: var(--semi-bold);
-  letter-spacing: 0.12em;
-  vertical-align: 0.38em;
+  letter-spacing: 0.1em;
+  vertical-align: 0.3em;
 }
 
 h3 {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
 }
 
 h4 {
-  font-size: 1.14rem;
+  font-size: 1.18rem;
 }
 
 h5 {
-  font-size: 1.04rem;
+  font-size: 1.06rem;
 }
 
 h6 {
@@ -65,20 +78,29 @@ h6 {
 }
 
 :where(h1, h2, h3, h4, h5, h6) > .icon:not(.anchor) {
-  margin-right: 0.45em;
+  margin-right: 0.5em;
   color: var(--primary);
-  font-size: 0.62em;
-  opacity: 0.9;
-  vertical-align: 0.12em;
+  font-size: 0.55em;
+  vertical-align: 0.16em;
 }
 
-// section headings emitted by list.html when data spans several years
+// year headings emitted by list.html when data spans several years, set as a
+// bed label rather than as a heading in its own right
 main h3[id] {
-  margin-top: 54px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 56px;
   color: var(--gray);
   font-family: var(--code);
   font-size: 0.72rem;
   font-weight: var(--semi-bold);
   letter-spacing: var(--letter-caps);
-  text-transform: uppercase;
+}
+
+main h3[id]:after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: var(--light-gray);
 }

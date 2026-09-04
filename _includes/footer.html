@@ -1,35 +1,45 @@
-{% assign image = page.footer | default: site.footer %}
-{% assign dark = page.footer-dark | is_nil: site.footer-dark | is_nil: true %}
+{% comment %}
+  The bottom margin of the sheet: who compiled it, where else to find them,
+  and the north arrow. Restyled by this site; upstream prints a photographic
+  band here instead.
+{% endcomment %}
 
-<footer
-  class="background"
-  style="--image: url('{{ image | relative_url | uri_escape }}')"
-  {% if dark == true or dark == false %}
-    data-dark="{{ dark }}"
-  {% endif %}
-  data-size="wide"
->
-  <!--
-    <div>
-      Extra details like contact info or address
-    </div>
-  -->
-
-  <div>
-    {% for link in site.links %}
-      {% assign key = link[0] %}
-      {% assign value = link[1] %}
-      {% include button.html type=key text="" link=value style="bare" %}
-    {% endfor %}
+<footer>
+  <div class="footer-block">
+    <p class="footer-label">Compiled by</p>
+    <p class="footer-text">
+      The Deformation and Tectonics group<br>
+      Institute of Earth Sciences, Faculty of Geosciences and Environment<br>
+      University of Lausanne
+    </p>
   </div>
 
-  <div>
-    &copy; {{ site.time | date: "%Y" }}
-    {{ site.title }}
-    &nbsp; | &nbsp; Built with
-    <a href="https://github.com/greenelab/lab-website-template">
-      Lab Website Template
-    </a>
+  <div class="footer-block">
+    <p class="footer-label">Elsewhere</p>
+    <div class="footer-links">
+      {% for link in site.links %}
+        {% assign key = link[0] %}
+        {% assign value = link[1] %}
+        {% include button.html type=key text="" link=value style="bare" %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="footer-block footer-block-end">
+    <svg class="north-arrow" viewBox="0 0 26 54" aria-hidden="true">
+      <text x="13" y="10" text-anchor="middle">N</text>
+      <path class="half-open" d="M13 16 L4 50 L13 42 Z" />
+      <path class="half-solid" d="M13 16 L22 50 L13 42 Z" />
+    </svg>
+    <p class="footer-label">
+      &copy; {{ site.time | date: "%Y" }} {{ site.title }}
+    </p>
+    <p class="footer-text">
+      Built with
+      <a href="https://github.com/greenelab/lab-website-template">
+        Lab Website Template
+      </a>
+    </p>
   </div>
 
   <input

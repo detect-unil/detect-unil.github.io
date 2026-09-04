@@ -1,178 +1,130 @@
 ---
 ---
 
+// People are printed as plates: a photograph in a paper mount, with the name
+// and role lettered underneath.
+
+.people {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+  gap: 34px 26px;
+  margin: 34px 0 0 0;
+}
+
+.people + .people {
+  margin-top: 26px;
+}
+
 .portrait-wrapper {
   display: contents;
 }
 
-// list.html emits a run of portraits with no wrapper of its own, so pages
-// put them in .people to get a grid rather than an inline-block flow
-.people {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
-  gap: 38px 22px;
-  margin: 34px 0 44px 0;
-}
-
-.people .portrait {
-  width: 100%;
-  max-width: unset;
-  margin: 0;
-}
-
-.people:has(.portrait[data-style="small"]) {
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-}
-
 .portrait {
   position: relative;
-  display: inline-flex;
+  display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: stretch;
   flex-direction: column;
-  margin: 0 24px 34px 0;
-  width: 180px;
-  max-width: calc(100% - 20px);
+  width: auto;
+  max-width: none;
+  margin: 0;
   text-align: left;
   text-decoration: none;
-  vertical-align: top;
 }
 
+.portrait-image {
+  width: 100%;
+  margin: 0 0 14px 0;
+  padding: 5px;
+  aspect-ratio: 4 / 5;
+  border: solid 1px var(--light-gray);
+  border-radius: 0;
+  background: var(--background);
+  object-fit: cover;
+  box-shadow: none;
+  filter: saturate(0.72);
+  transition: filter var(--transition), border var(--transition);
+}
+
+.portrait:hover .portrait-image {
+  border-color: var(--primary);
+  filter: saturate(1);
+}
+
+// the role marker, pinned to the corner of the mount like a plate number
+.portrait .icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  aspect-ratio: auto;
+  border: solid 1px var(--light-gray);
+  border-radius: 0;
+  background: var(--background);
+  box-shadow: none;
+  color: var(--primary);
+  font-size: 0.68rem;
+  transform: none;
+}
+
+.portrait-name {
+  font-family: var(--heading);
+  font-size: 1.04rem;
+  font-weight: var(--semi-bold);
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.portrait-description,
+.portrait-affiliation {
+  margin-top: 6px;
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.56rem;
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.portrait:hover .portrait-name {
+  color: var(--primary);
+}
+
+// former members are printed smaller, the way a plate of older material is
 .portrait[data-style="small"] {
-  width: 120px;
+  width: auto;
+}
+
+.portrait[data-style="small"] .portrait-image {
+  aspect-ratio: 1 / 1;
+  margin-bottom: 10px;
+}
+
+.portrait[data-style="small"] .portrait-name {
+  font-size: 0.92rem;
 }
 
 .portrait[data-style="tiny"] {
   flex-direction: row;
   align-items: center;
-  gap: 12px;
-  width: unset;
+  gap: 14px;
+  text-align: left;
+}
+
+.portrait[data-style="tiny"] .portrait-image {
+  width: 52px;
   margin: 0;
-}
-
-// role badge, tucked into the notch cut out of the frame
-.portrait .icon {
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 28px;
-  height: 28px;
-  color: var(--background);
-  background: var(--primary);
-  font-size: 11px;
-  box-shadow: none;
-  border-radius: 0;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity var(--transition), transform var(--transition);
-  z-index: 2;
-}
-
-.portrait:hover .icon,
-.portrait:focus-visible .icon {
-  opacity: 1;
-  transform: none;
+  padding: 3px;
+  aspect-ratio: 1 / 1;
 }
 
 .portrait[data-style="tiny"] .icon {
   display: none;
-}
-
-.portrait-image {
-  width: 100%;
-  margin-bottom: 14px;
-  aspect-ratio: 4 / 5;
-  border: var(--hairline);
-  border-radius: 0;
-  object-fit: cover;
-  box-shadow: none;
-  // corner cut, so the frame reads as a cropped map sheet rather than a photo
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - 20px),
-    calc(100% - 20px) 100%,
-    0 100%
-  );
-  filter: grayscale(0.85) contrast(1.05);
-  transition: filter var(--transition);
-}
-
-.portrait:hover .portrait-image,
-.portrait:focus-visible .portrait-image {
-  filter: grayscale(0) contrast(1);
-}
-
-// the placeholder silhouette, kept visible enough to read as a frame
-.portrait-image[src$=".svg"] {
-  background: var(--background-alt);
-  opacity: 0.55;
-}
-
-[data-dark="true"] .portrait-image[src$=".svg"] {
-  filter: invert(1) grayscale(1);
-  opacity: 0.3;
-}
-
-.portrait[data-style="small"] .portrait-image {
-  aspect-ratio: 1 / 1;
-}
-
-.portrait[data-style="tiny"] .portrait-image {
-  width: 44px;
-  margin: 0;
-  aspect-ratio: 1 / 1;
-  clip-path: none;
-}
-
-.portrait-name {
-  position: relative;
-  padding-bottom: 9px;
-  color: var(--text);
-  font-family: var(--heading);
-  font-size: 1rem;
-  font-weight: var(--bold);
-  letter-spacing: -0.02em;
-  line-height: var(--compact);
-  text-transform: uppercase;
-}
-
-.portrait-name:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 2px;
-  width: 22px;
-  height: 2px;
-  background: var(--primary);
-  transition: width var(--transition);
-}
-
-.portrait:hover .portrait-name:after {
-  width: 100%;
-}
-
-.portrait[data-style="tiny"] .portrait-name {
-  padding-bottom: 0;
-  text-transform: none;
-}
-
-.portrait[data-style="tiny"] .portrait-name:after {
-  display: none;
-}
-
-.portrait-description,
-.portrait-affiliation {
-  margin-top: 7px;
-  color: var(--gray);
-  font-family: var(--code);
-  font-size: 0.62rem;
-  letter-spacing: var(--letter-caps);
-  text-transform: uppercase;
-  line-height: var(--compact);
 }
 
 .portrait[data-style="tiny"] {

@@ -8,35 +8,32 @@
   flex-wrap: wrap;
   gap: 8px;
   max-width: 100%;
-  margin: 20px 0;
+  margin: 16px 0;
 }
 
 .tag {
   max-width: 100%;
   margin: 0;
-  padding: 4px 10px;
-  border: var(--hairline);
-  border-radius: var(--rounded);
-  background: var(--secondary);
-  color: var(--text);
-  font-size: var(--small);
-  letter-spacing: 0.02em;
+  padding: 4px 9px;
+  border: solid 1px var(--light-gray);
+  border-radius: 0;
+  background: none;
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.56rem;
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
   text-decoration: none;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: background var(--transition), color var(--transition),
-    border-color var(--transition);
+  transition: border var(--transition), color var(--transition),
+    background var(--transition);
 }
 
-.tag:hover {
-  background: var(--tint);
-  border-color: var(--primary);
-  color: var(--text);
-}
-
+.tag:hover,
 .tag[data-active] {
-  background: var(--primary);
   border-color: var(--primary);
-  color: var(--background);
+  background: var(--tint);
+  color: var(--primary);
 }

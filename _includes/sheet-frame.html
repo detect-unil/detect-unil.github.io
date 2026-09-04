@@ -1,0 +1,15 @@
+{% comment %}
+  The neat line and marginalia of the sheet. Added by this site, not part of
+  the upstream template. Decoration only, so it is hidden from assistive
+  technology, and _styles/sheet.scss drops it entirely on narrow screens where
+  there is no margin to print it in.
+{% endcomment %}
+
+<div class="sheet-frame" aria-hidden="true">
+  <span class="sheet-margin sheet-margin-left">
+    {{ site.title }} · {{ site.subtitle }}
+  </span>
+  <span class="sheet-margin sheet-margin-right">
+    46.5217° N &nbsp; 6.5793° E &nbsp;·&nbsp; Géopolis, UNIL-Mouline
+  </span>
+</div>

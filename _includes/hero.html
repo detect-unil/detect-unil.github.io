@@ -1,50 +1,56 @@
 {% comment %}
   Homepage hero. Added by this site, not part of the upstream template.
 
-  The fracture field on the canvas behind this block is the illustration, so
-  the hero itself carries only type, the actions, and a readout of what the
-  field currently measures.
+  The title block sits in the air above a geological cross-section that is
+  generated in the browser by _scripts/cross-section.js, so the hero itself
+  carries only type, the actions, and the caption that says where the section
+  comes from.
 
   Parameters, all optional:
     eyebrow   small monospaced line above the title
     title     first line of the h1
-    title2    second line of the h1, set offset like a faulted marker bed
+    title2    second line of the h1, set in italic
     lead      markdown paragraph under the title
     actions   captured html, usually a couple of button.html includes
-    readout   set to false to leave off the measurement strip
+    caption   note printed in the margin of the section
 {% endcomment %}
 
 <div class="hero">
-  {% if include.eyebrow %}
-    <p class="hero-eyebrow">
-      <span class="hero-eyebrow-mark" aria-hidden="true"></span>
-      {{ include.eyebrow }}
-    </p>
-  {% endif %}
+  <div class="hero-body">
+    {% if include.eyebrow %}
+      <p class="hero-eyebrow">
+        <span class="swatch" data-pattern="5" aria-hidden="true"></span>
+        {{ include.eyebrow }}
+      </p>
+    {% endif %}
 
-  {% if include.title %}
-    <h1 class="hero-title">
-      <span class="hero-line">{{ include.title }}</span>
-      {% if include.title2 %}
-        <span class="hero-line hero-line-offset">{{ include.title2 }}</span>
-      {% endif %}
-    </h1>
-  {% endif %}
+    {% if include.title %}
+      <h1 class="hero-title">
+        {{ include.title }}
+        {% if include.title2 %}
+          <em>{{ include.title2 }}</em>
+        {% endif %}
+      </h1>
+    {% endif %}
 
-  {% if include.lead %}
-    <div class="hero-lead">{{ include.lead | markdownify }}</div>
-  {% endif %}
+    {% if include.lead %}
+      <div class="hero-lead">{{ include.lead | markdownify }}</div>
+    {% endif %}
 
-  {% if include.actions %}
-    <div class="hero-actions">{{ include.actions }}</div>
-  {% endif %}
+    {% if include.actions %}
+      <div class="hero-actions">{{ include.actions }}</div>
+    {% endif %}
+  </div>
 
-  {% unless include.readout == false %}
-    {% include readout.html %}
-  {% endunless %}
+  <div class="hero-section">
+    <svg
+      class="cross-section"
+      role="img"
+      aria-label="Synthetic geological cross-section: folded layers cut by a normal fault"
+    ></svg>
 
-  <div class="hero-scale" aria-hidden="true">
-    <span class="hero-scale-bar"></span>
-    <span class="hero-scale-text">field of view</span>
+    {% if include.caption %}
+      <p class="hero-caption">{{ include.caption }}</p>
+    {% endif %}
   </div>
 </div>

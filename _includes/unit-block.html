@@ -1,0 +1,25 @@
+{% comment %}
+  One research axis, set as a map unit: a patterned box with the unit's code
+  in it, then the name and a sentence or two. Added by this site, not part of
+  the upstream template. Wrap two or more in <div class="unit-blocks"> ... </div>.
+
+  Parameters:
+    code     two letters, the way a map unit is lettered
+    unit     which of the six theme colours to print it in, 1 to 6
+    pattern  which lithology pattern to fill the box with, 1 to 6
+    label    short name for the axis
+    text     markdown, one or two sentences
+{% endcomment %}
+
+<div class="unit-block" data-unit="{{ include.unit | default: 1 }}">
+  <span
+    class="unit-code swatch"
+    data-pattern="{{ include.pattern | default: include.unit | default: 1 }}"
+  >
+    <span>{{ include.code }}</span>
+  </span>
+  <p class="unit-name">{{ include.label }}</p>
+  <p class="unit-text">
+    {{ include.text | markdownify | remove: "<p>" | remove: "</p>" }}
+  </p>
+</div>

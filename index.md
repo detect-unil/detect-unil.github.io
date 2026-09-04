@@ -30,36 +30,38 @@ The Deformation and Tectonics group at the Institute of Earth Sciences, Universi
 
 {%
   include hero.html
-  eyebrow="Institute of Earth Sciences · University of Lausanne · 46.5217°N 6.5793°E"
+  eyebrow="Institute of Earth Sciences · University of Lausanne"
   title="Deformation"
-  title2="& Tectonics"
+  title2="and Tectonics"
   lead=hero_lead
   actions=hero_actions
+  caption="Section drawn in your browser: six units folded and cut by one normal fault, with two conjugate fracture sets. Synthetic, and different on every visit."
 %}
 
 {% include section.html %}
 
 ## Research
 
-Founded in 2023, our group has been active along two research axes:
+Founded in 2023, our group has been active along two research axes.
 
-<div class="axes" markdown="0">
+<div class="unit-blocks" markdown="0">
 {%
-  include axis.html
-  number="01"
+  include unit-block.html
+  code="Bd"
+  unit="4"
+  pattern="4"
   label="Brittle deformation"
   text="Brittle deformation of the Earth's crust, with links to regional tectonics and geodynamics."
 %}
 {%
-  include axis.html
-  number="02"
+  include unit-block.html
+  code="Fn"
+  unit="2"
+  pattern="2"
   label="Fracture networks"
   text="Characterization, analysis, and advancement of the understanding of fracture networks in outcrop and the subsurface, with applications related to the energy transition."
 %}
 </div>
-
-<div class="with-rose" markdown="0">
-<div markdown="1">
 
 We leverage multi-scale mapping and analyses of field and remotely sensed digital datasets, which record the complex deformation history of the Earth's crust. To enhance the value of these large, high-resolution datasets, we are developing novel geostatistical and deep learning approaches to acquiring and interpreting 2D and 3D data in a geologically meaningful way.
 
@@ -73,13 +75,6 @@ Integration of these field-based and computational approaches can deliver better
   flip=true
   style="bare"
 %}
-
-</div>
-{%
-  include rose.html
-  caption="Length-weighted rose diagram of the synthetic fracture network drawn behind this page. Two conjugate sets, grown live in your browser, and a different network on every visit."
-%}
-</div>
 
 {% include section.html %}
 
