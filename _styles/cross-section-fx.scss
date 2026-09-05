@@ -1,0 +1,264 @@
+---
+---
+
+// How the section's six behaviours are inked. The geometry comes from
+// _scripts/cross-section-fx.js; every colour is taken from here, so all six
+// follow the theme and dark mode without the script knowing about either.
+//
+// PREVIEW ONLY, in part: the .csfx-picker block at the bottom is the control
+// that steps through the six while one is being chosen. Delete it, and the
+// matching block in the script, once the choice is made.
+
+$narrow: 700px;
+
+.cross-section[data-fx] {
+  cursor: crosshair;
+}
+
+// the air above the section is not painted, so without something to take the
+// pointer, half of the section would not answer to it
+.cross-section .hit {
+  fill: transparent;
+  pointer-events: all;
+}
+
+// what the section is saying about itself, printed in the top margin in the
+// same face the rest of its lettering uses
+.cross-section .readout {
+  fill: var(--dark-gray);
+  font-size: 10.5px;
+  transition: opacity var(--transition);
+}
+
+// --- restore --------------------------------------------------------------
+//
+// Nothing of its own: restoring the section is the section being painted from
+// a smaller strain, so it is drawn in exactly the same ink as the section.
+
+// --- lens -----------------------------------------------------------------
+
+.cross-section .lens {
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.cross-section[data-probing="true"] .lens {
+  opacity: 1;
+}
+
+// fabric too fine to have been drawn at the scale of the section
+.cross-section .fine line {
+  fill: none;
+  stroke: color-mix(in srgb, var(--text) 38%, transparent);
+  stroke-width: 0.4;
+  stroke-linecap: round;
+}
+
+// paper of the lens's own, so that what is under the glass is only what the
+// glass is showing
+.cross-section .glass {
+  fill: color-mix(in srgb, var(--background-alt) 70%, var(--background));
+}
+
+.cross-section .lens-ring {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.cross-section .lens-glint {
+  fill: none;
+  stroke: color-mix(in srgb, var(--background) 65%, transparent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+// --- borehole -------------------------------------------------------------
+
+.cross-section .hole {
+  stroke: var(--text);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 3;
+}
+
+.cross-section .collar {
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+// a strip log is read at a glance, so the units are laid down in it far more
+// heavily than they are in the section itself
+@for $i from 1 through 6 {
+  .cross-section .log .unit-#{$i} {
+    fill: color-mix(in srgb, var(--unit-#{$i}) 72%, transparent);
+  }
+}
+
+.cross-section .log .basement {
+  fill: color-mix(in srgb, var(--text) 28%, transparent);
+}
+
+.cross-section .pick {
+  stroke: var(--text);
+  stroke-width: 0.9;
+}
+
+// --- probe ----------------------------------------------------------------
+
+.cross-section .guide {
+  fill: none;
+  stroke: color-mix(in srgb, var(--text) 34%, transparent);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+
+.cross-section .to-surface {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.cross-section .pick-dot {
+  fill: var(--background);
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.cross-section .probe {
+  transition: opacity var(--transition);
+}
+
+// the unit under the pointer, picked out everywhere else it crops out
+.cross-section .unit {
+  transition: fill 0.16s linear;
+}
+
+@for $i from 1 through 6 {
+  .cross-section[data-lit="#{$i}"] .unit-#{$i} {
+    fill: color-mix(in srgb, var(--unit-#{$i}) 72%, transparent);
+  }
+}
+
+// --- dip ------------------------------------------------------------------
+
+.cross-section .station-dot {
+  fill: var(--background);
+  stroke: var(--text);
+  stroke-width: 1.4;
+}
+
+.cross-section .bedding {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.cross-section .ends {
+  opacity: 0.8;
+}
+
+// --- slip -----------------------------------------------------------------
+//
+// A slip event is sudden, so the section takes the knock with it.
+
+@media (prefers-reduced-motion: no-preference) {
+  .cross-section.is-slipping {
+    animation: cross-section-slip 0.3s ease-out;
+  }
+}
+
+@keyframes cross-section-slip {
+  0% {
+    transform: translate(0, 0);
+  }
+  18% {
+    transform: translate(1.6px, -1.1px);
+  }
+  44% {
+    transform: translate(-1.3px, 0.9px);
+  }
+  72% {
+    transform: translate(0.7px, 0.4px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+// The section letters itself in last, and whatever is being done to it is
+// lettering, so it waits for the same moment.
+
+@media (prefers-reduced-motion: no-preference) {
+  .cross-section .overlay {
+    animation: cross-section-letter 0.7s ease 1.4s both;
+  }
+}
+
+// --- the picker -----------------------------------------------------------
+//
+// PREVIEW ONLY. Delete this block together with the picker in the script.
+
+.csfx-picker {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 12px;
+  padding: 6px 10px;
+  border: solid 1px color-mix(in srgb, var(--light-gray) 80%, transparent);
+  background: color-mix(in srgb, var(--background) 88%, transparent);
+  backdrop-filter: blur(4px);
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.58rem;
+  letter-spacing: var(--letter-caps);
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.csfx-picker-name {
+  min-width: 13ch;
+  color: var(--text);
+}
+
+.csfx-picker button {
+  margin: 0;
+  padding: 2px 6px;
+  border: solid 1px transparent;
+  background: none;
+  color: var(--primary);
+  font-family: var(--code);
+  font-size: 0.58rem;
+  letter-spacing: var(--letter-caps);
+  line-height: 1;
+  text-transform: uppercase;
+  appearance: none;
+  transition: border var(--transition), background var(--transition);
+}
+
+.csfx-picker button:hover {
+  border-color: var(--primary);
+}
+
+.csfx-picker-pin[data-on="true"] {
+  border-color: var(--primary);
+  background: var(--tint);
+}
+
+@media (max-width: $narrow) {
+  .csfx-picker {
+    top: 8px;
+    right: 8px;
+    gap: 0 8px;
+    font-size: 0.52rem;
+  }
+
+  .csfx-picker-label,
+  .csfx-picker-hint {
+    display: none;
+  }
+}
