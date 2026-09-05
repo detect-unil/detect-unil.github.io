@@ -1,0 +1,31 @@
+.figure {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 14px;
+  margin: 40px 0;
+}
+
+.figure-image {
+  display: contents;
+}
+
+.figure-image img {
+  padding: 5px;
+  border: solid 1px var(--light-gray);
+  border-radius: 0;
+  background: var(--background);
+  box-shadow: none;
+}
+
+.figure-caption {
+  max-width: 62ch;
+  color: var(--gray);
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: left;
+  line-height: 1.6;
+}
+
+/*# sourceMappingURL=figure.css.map */

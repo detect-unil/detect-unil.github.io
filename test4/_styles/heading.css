@@ -1,0 +1,92 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 46px 0 20px 0;
+  font-family: var(--heading);
+  font-weight: var(--bold);
+  font-variant-numeric: lining-nums;
+  text-align: left;
+  text-wrap: balance;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+h1 {
+  margin: 0 0 28px 0;
+  font-size: var(--xxl);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  position: relative;
+  margin-top: 6px;
+  font-size: var(--xl);
+}
+
+h2:before {
+  counter-increment: section-index;
+  content: counter(section-index, decimal-leading-zero);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.1em;
+  height: 1.9em;
+  margin-right: 0.85em;
+  border: solid 1px var(--unit);
+  background-color: color-mix(in srgb, var(--unit) var(--wash), transparent);
+  background-image: repeating-linear-gradient(45deg, color-mix(in srgb, var(--unit) 55%, transparent) 0 1px, transparent 1px 5px);
+  color: var(--text);
+  font-family: var(--code);
+  font-size: 0.4em;
+  font-weight: var(--semi-bold);
+  letter-spacing: 0.1em;
+  vertical-align: 0.3em;
+}
+
+h3 {
+  font-size: 1.35rem;
+}
+
+h4 {
+  font-size: 1.18rem;
+}
+
+h5 {
+  font-size: 1.06rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+:where(h1, h2, h3, h4, h5, h6) > .icon:not(.anchor) {
+  margin-right: 0.5em;
+  color: var(--primary);
+  font-size: 0.55em;
+  vertical-align: 0.16em;
+}
+
+main h3[id] {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 56px;
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.72rem;
+  font-weight: var(--semi-bold);
+  letter-spacing: var(--letter-caps);
+}
+
+main h3[id]:after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: var(--light-gray);
+}
+
+/*# sourceMappingURL=heading.css.map */

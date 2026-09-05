@@ -1,0 +1,117 @@
+main {
+  counter-reset: section-index;
+}
+
+section {
+  position: relative;
+  --unit: var(--unit-1);
+  --pattern: 1;
+  padding: var(--stack) max(var(--gutter), (100% - var(--page)) / 2);
+  background: color-mix(in srgb, var(--unit) 6%, var(--background));
+  transition: background var(--transition), color var(--transition);
+}
+
+[data-dark=true] section {
+  background: color-mix(in srgb, var(--unit) 9%, var(--background));
+}
+
+main > section:nth-of-type(6n + 1) {
+  --unit: var(--unit-1);
+  --pattern: 1;
+}
+
+main > section:nth-of-type(6n + 2) {
+  --unit: var(--unit-2);
+  --pattern: 2;
+}
+
+main > section:nth-of-type(6n + 3) {
+  --unit: var(--unit-3);
+  --pattern: 3;
+}
+
+main > section:nth-of-type(6n + 4) {
+  --unit: var(--unit-4);
+  --pattern: 4;
+}
+
+main > section:nth-of-type(6n + 5) {
+  --unit: var(--unit-5);
+  --pattern: 5;
+}
+
+main > section:nth-of-type(6n + 6) {
+  --unit: var(--unit-6);
+  --pattern: 6;
+}
+
+section[data-size=wide] {
+  padding: var(--stack) var(--gutter);
+}
+
+section[data-size=full] {
+  padding: 0;
+  background: none;
+}
+
+section[data-size=full] > * {
+  margin: 0;
+  border-radius: 0;
+}
+
+main > section:last-of-type {
+  flex-grow: 1;
+}
+
+main > section + section {
+  border-top: solid 1px color-mix(in srgb, var(--unit) 55%, var(--light-gray));
+}
+
+main > section + section:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 9px;
+  color: var(--unit);
+  opacity: 0.55;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(45deg, currentColor 0 1px, transparent 1px 5px);
+}
+
+main > section:nth-of-type(6n + 2):before {
+  background-image: repeating-linear-gradient(0deg, currentColor 0 1px, transparent 1px 4px);
+}
+
+main > section:nth-of-type(6n + 3):before {
+  background-image: radial-gradient(currentColor 0.7px, transparent 0.8px);
+  background-size: 5px 5px;
+}
+
+main > section:nth-of-type(6n + 4):before {
+  background-image: repeating-linear-gradient(-45deg, currentColor 0 1px, transparent 1px 5px);
+}
+
+main > section:nth-of-type(6n + 5):before {
+  background-image: repeating-linear-gradient(0deg, currentColor 0 1px, transparent 1px 5px), repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 9px);
+}
+
+main > section:nth-of-type(6n + 6):before {
+  background-image: repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 6px);
+}
+
+main > section[data-size=full] + section:before,
+main > section[data-size=full]:before {
+  content: none;
+}
+
+section > :first-child {
+  margin-top: 0;
+}
+
+section > :last-child {
+  margin-bottom: 0;
+}
+
+/*# sourceMappingURL=section.css.map */

@@ -1,0 +1,127 @@
+.people {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+  gap: 34px 26px;
+  margin: 34px 0 0 0;
+}
+
+.people + .people {
+  margin-top: 26px;
+}
+
+.portrait-wrapper {
+  display: contents;
+}
+
+.portrait {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: column;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.portrait-image {
+  width: 100%;
+  margin: 0 0 14px 0;
+  padding: 5px;
+  aspect-ratio: 4/5;
+  border: solid 1px var(--light-gray);
+  border-radius: 0;
+  background: var(--background);
+  object-fit: cover;
+  box-shadow: none;
+  filter: saturate(0.72);
+  transition: filter var(--transition), border var(--transition);
+}
+
+.portrait:hover .portrait-image {
+  border-color: var(--primary);
+  filter: saturate(1);
+}
+
+.portrait .icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  aspect-ratio: auto;
+  border: solid 1px var(--light-gray);
+  border-radius: 0;
+  background: var(--background);
+  box-shadow: none;
+  color: var(--primary);
+  font-size: 0.68rem;
+  transform: none;
+}
+
+.portrait-name {
+  font-family: var(--heading);
+  font-size: 1.04rem;
+  font-weight: var(--semi-bold);
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.portrait-description,
+.portrait-affiliation {
+  margin-top: 6px;
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.56rem;
+  letter-spacing: var(--letter-caps);
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.portrait:hover .portrait-name {
+  color: var(--primary);
+}
+
+.portrait[data-style=small] {
+  width: auto;
+}
+
+.portrait[data-style=small] .portrait-image {
+  aspect-ratio: 1/1;
+  margin-bottom: 10px;
+}
+
+.portrait[data-style=small] .portrait-name {
+  font-size: 0.92rem;
+}
+
+.portrait[data-style=tiny] {
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+}
+
+.portrait[data-style=tiny] .portrait-image {
+  width: 52px;
+  margin: 0;
+  padding: 3px;
+  aspect-ratio: 1/1;
+}
+
+.portrait[data-style=tiny] .icon {
+  display: none;
+}
+
+.portrait[data-style=tiny] .portrait-description,
+.portrait[data-style=tiny] .portrait-affiliation {
+  display: none;
+}
+
+/*# sourceMappingURL=portrait.css.map */

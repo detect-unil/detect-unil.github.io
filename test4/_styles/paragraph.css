@@ -1,0 +1,9 @@
+p {
+  margin: 20px 0;
+  max-width: 78ch;
+  text-align: left;
+  text-wrap: pretty;
+  line-height: var(--spacing);
+}
+
+/*# sourceMappingURL=paragraph.css.map */

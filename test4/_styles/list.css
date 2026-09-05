@@ -1,0 +1,44 @@
+ul,
+ol {
+  margin: 20px 0;
+  padding-left: 26px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul > li {
+  position: relative;
+}
+
+ul > li:before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  background: var(--unit, var(--primary));
+  border: solid 1px color-mix(in srgb, var(--text) 35%, transparent);
+}
+
+li {
+  margin: 6px 0;
+  padding-left: 8px;
+  max-width: 76ch;
+  text-align: left;
+  line-height: var(--spacing);
+}
+li ul,
+li ol {
+  margin: 0;
+}
+
+ol > li::marker {
+  color: var(--gray);
+  font-family: var(--code);
+  font-size: 0.8em;
+}
+
+/*# sourceMappingURL=list.css.map */

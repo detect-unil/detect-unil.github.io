@@ -1,0 +1,88 @@
+[data-dark=false] {
+  --primary: #1a4f9c;
+  --secondary: #e3ddcc;
+  --text: #16181c;
+  --background: #f8f6f0;
+  --background-alt: #f1ede2;
+  --light-gray: #d5cfbe;
+  --gray: #6a665c;
+  --dark-gray: #46443c;
+  --overlay: #16181c1f;
+  --tint: #1a4f9c12;
+  --invert: #14171d;
+  --invert-text: #f8f6f0;
+  --unit-1: #c8912f;
+  --unit-2: #3f8d84;
+  --unit-3: #7b6aa6;
+  --unit-4: #b34a34;
+  --unit-5: #4a6fa5;
+  --unit-6: #6a8b41;
+  --wash: 18%;
+  --wash-strong: 30%;
+}
+
+[data-dark=true] {
+  --primary: #74aaff;
+  --secondary: #222a35;
+  --text: #e7e9ef;
+  --background: #0d1015;
+  --background-alt: #12161d;
+  --light-gray: #2b323d;
+  --gray: #8d93a1;
+  --dark-gray: #aeb4c1;
+  --overlay: #e7e9ef1f;
+  --tint: #74aaff14;
+  --invert: #080a0e;
+  --invert-text: #e7e9ef;
+  --unit-1: #e0ad4d;
+  --unit-2: #55b4a9;
+  --unit-3: #a290d2;
+  --unit-4: #e0715b;
+  --unit-5: #7099e0;
+  --unit-6: #9cba5e;
+  --wash: 24%;
+  --wash-strong: 38%;
+}
+
+:root {
+  --title: "Newsreader", Georgia, serif;
+  --heading: "Newsreader", Georgia, serif;
+  --body: "Newsreader", Georgia, serif;
+  --code: "Roboto Mono", monospace;
+  --small: 0.82rem;
+  --tiny: 0.7rem;
+  --large: clamp(1.08rem, 1.02rem + 0.35vw, 1.26rem);
+  --xl: clamp(1.45rem, 1.2rem + 1.1vw, 2.05rem);
+  --xxl: clamp(2rem, 1.55rem + 2.1vw, 3.1rem);
+  --display: clamp(2.7rem, 1.2rem + 6.2vw, 5.8rem);
+  --thin: 400;
+  --regular: 400;
+  --semi-bold: 500;
+  --bold: 700;
+  --spacing: 1.7;
+  --compact: 1.45;
+  --page: 1120px;
+  --gutter: clamp(20px, 5vw, 56px);
+  --stack: clamp(56px, 7vw, 100px);
+  --rail: 150px;
+  --rounded: 0px;
+  --hairline: solid 1px var(--light-gray);
+  --shadow: 0 20px 44px -34px var(--overlay);
+  --transition: 0.22s cubic-bezier(0.2, 0.7, 0.3, 1);
+  --letter-caps: 0.14em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition: 0s linear;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*# sourceMappingURL=-theme.css.map */

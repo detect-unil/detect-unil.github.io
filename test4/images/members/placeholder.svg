@@ -1,0 +1,6 @@
+<!-- Neutral placeholder portrait. Replace with a real photo: see TODO.md -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="No photo available yet">
+  <rect fill="#eef2f5" width="600" height="600"/>
+  <circle fill="#c8d2da" cx="300" cy="235" r="95"/>
+  <path fill="#c8d2da" d="M300 355c-97 0-176 63-176 141v104h352V496c0-78-79-141-176-141z"/>
+</svg>

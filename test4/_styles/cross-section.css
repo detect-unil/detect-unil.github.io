@@ -1,0 +1,137 @@
+.cross-section {
+  color: var(--text);
+}
+
+.cross-section .unit {
+  stroke: none;
+}
+
+.cross-section .unit-1 {
+  fill: color-mix(in srgb, var(--unit-1) var(--wash-strong), transparent);
+}
+
+.cross-section .unit-2 {
+  fill: color-mix(in srgb, var(--unit-2) var(--wash-strong), transparent);
+}
+
+.cross-section .unit-3 {
+  fill: color-mix(in srgb, var(--unit-3) var(--wash-strong), transparent);
+}
+
+.cross-section .unit-4 {
+  fill: color-mix(in srgb, var(--unit-4) var(--wash-strong), transparent);
+}
+
+.cross-section .unit-5 {
+  fill: color-mix(in srgb, var(--unit-5) var(--wash-strong), transparent);
+}
+
+.cross-section .unit-6 {
+  fill: color-mix(in srgb, var(--unit-6) var(--wash-strong), transparent);
+}
+
+.cross-section .basement {
+  fill: color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+.cross-section .contact {
+  fill: none;
+  stroke: color-mix(in srgb, var(--text) 40%, transparent);
+  stroke-width: 1;
+}
+
+.cross-section .fractures {
+  stroke: color-mix(in srgb, var(--text) 45%, transparent);
+  stroke-width: 0.75;
+  stroke-linecap: round;
+}
+
+.cross-section .fault {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.8;
+}
+
+.cross-section .topo {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.cross-section .axis {
+  fill: none;
+  stroke: var(--gray);
+  stroke-width: 1;
+  stroke-dasharray: 5 4;
+}
+
+.cross-section .slip line,
+.cross-section .slip path {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cross-section .annotation {
+  fill: var(--gray);
+  stroke: var(--background);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+  font-family: var(--code);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cross-section .scale-bar .on {
+  fill: var(--text);
+}
+
+.cross-section .scale-bar .off {
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cross-section .sweep {
+    animation: cross-section-sweep 1.5s cubic-bezier(0.3, 0.8, 0.3, 1) both;
+  }
+  .cross-section .topo {
+    stroke-dasharray: 4000;
+    animation: cross-section-trace 1.8s ease-out 0.2s both;
+  }
+  .cross-section .marks {
+    animation: cross-section-letter 0.7s ease 1.4s both;
+  }
+}
+@keyframes cross-section-sweep {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes cross-section-trace {
+  from {
+    stroke-dashoffset: 4000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes cross-section-letter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*# sourceMappingURL=cross-section.css.map */
