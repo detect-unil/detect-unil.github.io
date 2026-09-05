@@ -1,0 +1,54 @@
+name: deploy-test4
+run-name: Deploy fourth redesign to /test4/
+
+# Publishes the redesign4 branch to <pages-url>/test4/. redesign4 is the third
+# redesign with the cross-section made interactive, so the pair to compare it
+# against is /test3/, which is the same design with the section drawn and left
+# alone. The first two redesigns are still at /test/ and /test2/.
+# Does not touch the live site, which is built from main by build-site.yaml.
+
+on:
+  # run on commit to redesign4 branch
+  push:
+    branches:
+      - redesign4
+
+  # run manually by user
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-test4:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout redesign4 branch contents
+        uses: actions/checkout@v7
+
+      - name: Install Ruby packages
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+          bundler-cache: true
+
+      - name: Get Pages URL
+        id: pages
+        uses: actions/configure-pages@v6
+
+      - name: Set root URL
+        run: |
+          printf "\n\nurl: ${{ steps.pages.outputs.origin }}" >> _config.yaml
+
+      - name: Build test version of site
+        run: |
+          JEKYLL_ENV=production bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}/test4"
+
+      - name: Commit test site to Pages branch
+        uses: JamesIves/github-pages-deploy-action@v4.8.0
+        with:
+          folder: _site
+          target-folder: test4
+          commit-message: "Deploy fourth redesign preview to /test4/"
+          force: false
